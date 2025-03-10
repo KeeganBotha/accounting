@@ -3,7 +3,7 @@
 import { signIn, signOut } from "@/auth";
 
 export async function login() {
-  await signIn("github", { redirectTo: "/home" });
+  await signIn("github", { redirectTo: "/private/home" });
 }
 
 export async function logout() {
