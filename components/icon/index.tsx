@@ -5,8 +5,10 @@ const icons = {
   settings: <Settings />,
 };
 
+export type IconName = keyof typeof icons;
+
 type IconProps = {
-  iconName: keyof typeof icons;
+  iconName: IconName;
 };
 
 export function Icon({ iconName }: IconProps) {
