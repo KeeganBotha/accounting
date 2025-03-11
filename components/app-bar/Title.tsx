@@ -3,7 +3,8 @@
 import { usePathname } from "next/navigation";
 
 export function Title() {
-  const pathName = usePathname();
+  const pathname = usePathname();
+  const title = pathname.split("/").pop();
 
-  return <h4></h4>;
+  return <h4>{title}</h4>;
 }
