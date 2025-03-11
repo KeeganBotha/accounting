@@ -3,7 +3,7 @@ import { Title } from "./Title";
 
 export function AppBar() {
   return (
-    <div className="h-[5rem] w-[calc(100vw-10rem)] shadow-lg w-fill">
+    <div className="h-[5rem] w-[calc(100vw-10rem)] shadow-lg w-fill p-4 bg flex flex-row justify-between items-center">
       <Title />
       <ModeToggle />
     </div>
