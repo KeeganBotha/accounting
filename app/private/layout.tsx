@@ -1,5 +1,5 @@
-import { AppBar } from "./(components)/AppBar";
-import { SideMenu } from "./(components)/SideMenu";
+import { AppBar } from "@/components/app-bar";
+import { SideMenu } from "@/components/side-menu";
 
 type LayoutProps = {
   children: React.ReactNode;
@@ -7,10 +7,10 @@ type LayoutProps = {
 
 export default function Layout({ children }: LayoutProps) {
   return (
-    <div className="flex flex-col">
-      <AppBar />
-      <div className="flex flex-row">
-        <SideMenu />
+    <div className="flex flex-row">
+      <SideMenu />
+      <div className="flex flex-col">
+        <AppBar />
         <div>{children}</div>
       </div>
     </div>
