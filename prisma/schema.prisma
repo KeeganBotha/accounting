@@ -13,8 +13,39 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model user {
+model User {
+//Table Structure
   id    Int     @id @default(autoincrement())
   email String  @unique
   name  String?
+
+//Links
+  settings SideMenuSettings[] 
+
+//Name
+  @@map("user")
+}
+
+model SideMenu {
+  id       Int       @id @default(autoincrement())
+  name     String
+  parentId Int?     
+  parent   SideMenu? @relation("SideMenuToSelf", fields: [parentId], references: [id])
+  children SideMenu[] @relation("SideMenuToSelf")
+
+  settings SideMenuSettings[] // One side menu can have multiple settings
+
+  @@map("side_menu")
+}
+
+model SideMenuSettings {
+  id         Int      @id @default(autoincrement())
+
+  userId     Int
+  user       User     @relation(fields: [userId], references: [id])
+
+  sideMenuId Int
+  sideMenu   SideMenu @relation(fields: [sideMenuId], references: [id])
+
+  @@map("side_menu_settings")
 }
