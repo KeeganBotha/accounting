@@ -2542,6 +2542,11 @@ next-auth@^5.0.0-beta.25:
   dependencies:
     "@auth/core" "0.37.2"
 
+next-safe-action@^7.10.4:
+  version "7.10.4"
+  resolved "https://registry.yarnpkg.com/next-safe-action/-/next-safe-action-7.10.4.tgz#89da1f12e9d9a1934bf598710ecf9ef90304afe5"
+  integrity sha512-rZE89DTNgiTJ8oPQBOZm+jd0Uf/pLkN+GE3PndER6vWqHGYGN7HMLvhpggkbE8W4TGp+qM7CPyrXye1wCjZLVg==
+
 next-themes@^0.4.5:
   version "0.4.6"
   resolved "https://registry.npmjs.org/next-themes/-/next-themes-0.4.6.tgz"
