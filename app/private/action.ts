@@ -2,6 +2,8 @@
 
 import { privateProcedure } from "@/lib/safe-action";
 
-const getSideMenu = privateProcedure.action(async ({ ctx }) => {
-  const result = await ctx.svc.sideMenuService;
+export const getSideMenu = privateProcedure.action(async ({ ctx }) => {
+  const result = await ctx.svc.sideMenuService.getSideMenu();
+
+  return result;
 });
