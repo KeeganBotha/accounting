@@ -15,7 +15,8 @@ CREATE TABLE "side_menu" (
     "path" TEXT NOT NULL,
     "parentId" INTEGER,
 
-    CONSTRAINT "side_menu_pkey" PRIMARY KEY ("id")
+    CONSTRAINT "side_menu_pkey" PRIMARY KEY ("id"),
+    CONSTRAINT "side_menu_parentId_fkey" FOREIGN KEY ("parentId") REFERENCES "side_menu"("id") ON DELETE SET NULL
 );
 
 -- CreateTable

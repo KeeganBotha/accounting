@@ -11,10 +11,10 @@ export default async function Layout({ children }: LayoutProps) {
   const sideMenuItems = sideMenuItemsQuery?.data ?? [];
 
   return (
-    <div className="flex flex-row">
-      <SideMenu />
-      <div className="flex flex-col">
-        <AppBar />
+    <div className="flex flex-col">
+      <AppBar />
+      <div className="flex flex-row overflow-hidden">
+        <SideMenu data={sideMenuItems} />
         <div>{children}</div>
       </div>
     </div>
