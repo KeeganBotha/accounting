@@ -1,4 +1,12 @@
-import { House, LogOut, Menu, Moon, Settings, Sun } from "lucide-react";
+import {
+  ChevronDown,
+  House,
+  LogOut,
+  Menu,
+  Moon,
+  Settings,
+  Sun,
+} from "lucide-react";
 
 const icons = {
   house: <House />,
@@ -7,6 +15,7 @@ const icons = {
   moon: <Moon />,
   sun: <Sun />,
   logout: <LogOut />,
+  chevronDown: <ChevronDown />,
 };
 
 export type IconName = keyof typeof icons;

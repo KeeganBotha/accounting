@@ -15,7 +15,7 @@ export default async function Layout({ children }: LayoutProps) {
       <AppBar />
       <div className="flex flex-row overflow-hidden">
         <SideMenu data={sideMenuItems} />
-        <div>{children}</div>
+        <div className="p-4">{children}</div>
       </div>
     </div>
   );
