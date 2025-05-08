@@ -8,6 +8,7 @@ import {
   Settings,
   Sun,
 } from "lucide-react";
+import { cloneElement } from "react";
 
 const icons = {
   house: <House />,
@@ -24,8 +25,9 @@ export type IconName = keyof typeof icons;
 
 type IconProps = {
   iconName: IconName;
+  className?: string;
 };
 
-export function Icon({ iconName }: IconProps) {
-  return icons[iconName];
+export function Icon({ iconName, className = "" }: IconProps) {
+  return cloneElement(icons[iconName], { className });
 }

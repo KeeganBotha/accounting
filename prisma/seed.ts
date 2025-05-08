@@ -14,13 +14,14 @@ async function main() {
         id: 2,
         name: "Accounting",
         path: "",
-        iconName: "",
+        iconName: "banknote",
       },
       {
         id: 3,
         name: "Ledgers",
         path: "/private/accounting/ledgers",
-        iconName: "banknote",
+        iconName: "",
+        parentId: 2,
       },
     ],
   });
