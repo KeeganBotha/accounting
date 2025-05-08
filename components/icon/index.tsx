@@ -1,4 +1,5 @@
 import {
+  Banknote,
   ChevronDown,
   House,
   LogOut,
@@ -16,6 +17,7 @@ const icons = {
   sun: <Sun />,
   logout: <LogOut />,
   chevronDown: <ChevronDown />,
+  banknote: <Banknote />,
 };
 
 export type IconName = keyof typeof icons;

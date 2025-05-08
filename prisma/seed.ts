@@ -2,17 +2,25 @@ import { PrismaClient } from "@prisma/client";
 const prisma = new PrismaClient();
 
 async function main() {
-  const sideMenu = await prisma.sideMenu.createMany({
+  await prisma.sideMenu.createMany({
     data: [
       {
+        id: 1,
         name: "Home",
         path: "/private/home",
+        iconName: "house",
+      },
+      {
+        id: 2,
+        name: "Accounting",
+        path: "",
         iconName: "",
       },
       {
+        id: 3,
         name: "Ledgers",
-        path: "/private/ledgers",
-        iconName: "",
+        path: "/private/accounting/ledgers",
+        iconName: "banknote",
       },
     ],
   });
