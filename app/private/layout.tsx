@@ -1,6 +1,6 @@
-import { AppBar } from "@/components/app-bar";
-import { SideMenu } from "@/components/side-menu";
 import { getSideMenu } from "./action";
+import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
+import { AppSidebar } from "@/components/app-side-bar";
 
 type LayoutProps = {
   children: React.ReactNode;
@@ -11,12 +11,12 @@ export default async function Layout({ children }: LayoutProps) {
   const sideMenuItems = sideMenuItemsQuery?.data ?? [];
 
   return (
-    <div className="flex flex-col">
-      <AppBar />
-      <div className="flex flex-row overflow-hidden">
-        <SideMenu data={sideMenuItems} />
-        <div className="p-4">{children}</div>
-      </div>
-    </div>
+    <SidebarProvider>
+      <AppSidebar items={sideMenuItems} />
+      <main>
+        <SidebarTrigger />
+        {children}
+      </main>
+    </SidebarProvider>
   );
 }
