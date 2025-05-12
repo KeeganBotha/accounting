@@ -32,7 +32,7 @@ export function Form() {
           >
             <div className="grid gap-6">
               <div className="flex flex-col gap-4">
-                <Button type="submit" variant="outline" className="w-full">
+                <Button type="submit" variant="default" className="w-full">
                   <svg
                     height="32"
                     aria-hidden="true"
