@@ -19,6 +19,7 @@ const icons = {
   logout: <LogOut />,
   chevronDown: <ChevronDown />,
   banknote: <Banknote />,
+  None: <></>,
 };
 
 export type IconName = keyof typeof icons;
