@@ -14,6 +14,7 @@ import { login } from "./action";
 export function Form() {
   const handleGithubLogin = async () => {
     await login();
+    toaster;
   };
 
   return (
