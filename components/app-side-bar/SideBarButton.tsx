@@ -40,7 +40,7 @@ export function SideBarButton({ item }: SideBarButtonProps) {
         <CollapsibleContent>
           <SidebarMenuSub>
             {item.children.map((subItem) => (
-              <SidebarMenuSubItem key={subItem.name}>
+              <SidebarMenuSubItem key={subItem.id}>
                 <SidebarMenuSubButton asChild>
                   <a href={subItem.path}>
                     <span>{subItem.name}</span>

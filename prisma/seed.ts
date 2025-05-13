@@ -12,16 +12,9 @@ async function main() {
       },
       {
         id: 2,
-        name: "Accounting",
+        name: "Reminders",
         path: "",
-        iconName: "banknote",
-      },
-      {
-        id: 3,
-        name: "Ledgers",
-        path: "/private/accounting/ledgers",
-        iconName: "",
-        parentId: 2,
+        iconName: "calendar",
       },
     ],
   });

@@ -7,6 +7,7 @@ import {
   Moon,
   Settings,
   Sun,
+  Calendar,
 } from "lucide-react";
 import { cloneElement } from "react";
 
@@ -19,7 +20,7 @@ const icons = {
   logout: <LogOut />,
   chevronDown: <ChevronDown />,
   banknote: <Banknote />,
-  None: <></>,
+  calendar: <Calendar />,
 };
 
 export type IconName = keyof typeof icons;
