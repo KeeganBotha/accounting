@@ -1,6 +1,7 @@
 "use client";
 
-import { Button } from "@/components/ui/button";
+import { toast } from "sonner";
+
 import {
   Card,
   CardContent,
@@ -9,12 +10,14 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { cn } from "@/lib/utils";
+import { Button } from "@/components/ui/button";
+
 import { login } from "./action";
 
 export function Form() {
   const handleGithubLogin = async () => {
     await login();
-    toaster;
+    toast.success("Welcome");
   };
 
   return (

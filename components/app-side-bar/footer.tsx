@@ -8,6 +8,7 @@ import {
   Moon,
   Sun,
 } from "lucide-react";
+import { toast } from "sonner";
 import { useTheme } from "next-themes";
 import { useSession } from "next-auth/react";
 
@@ -42,6 +43,7 @@ export function Footer() {
 
   function handleLogout() {
     logout();
+    toast.success("Bye for now");
   }
 
   return (
