@@ -21,7 +21,8 @@ import {
   CollapsibleTrigger,
 } from "../ui/collapsible";
 import { Icon } from "../icon";
-import { NavUser } from "./footer";
+import { Footer } from "./footer";
+import { Header } from "./Header";
 
 type AppSidebarProps = {
   items: NonNullable<InferSafeActionFnResult<typeof getSideMenu>["data"]>;
@@ -31,14 +32,13 @@ export function AppSidebar({ items }: AppSidebarProps) {
   return (
     <Sidebar collapsible="icon">
       <SidebarHeader>
-        <div>Header</div>
+        <Header />
       </SidebarHeader>
       <SidebarContent>
         <MainNav items={items} />
-        {/* <NavProjects projects={data.projects} /> */}
       </SidebarContent>
       <SidebarFooter>
-        <NavUser user={{ avatar: "", email: "", name: "" }} />
+        <Footer user={{ avatar: "", email: "", name: "" }} />
       </SidebarFooter>
       <SidebarRail />
     </Sidebar>

@@ -1,6 +1,13 @@
 "use client";
 
-import { BadgeCheck, Bell, ChevronsUpDown, LogOut } from "lucide-react";
+import {
+  BadgeCheck,
+  Bell,
+  ChevronsUpDown,
+  LogOut,
+  Moon,
+  Sun,
+} from "lucide-react";
 
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import {
@@ -19,17 +26,19 @@ import {
   useSidebar,
 } from "@/components/ui/sidebar";
 import { logout } from "@/app/login/action";
+import { useTheme } from "next-themes";
 
-export function NavUser({
-  user,
-}: {
+type FooterProps = {
   user: {
     name: string;
     email: string;
     avatar: string;
   };
-}) {
+};
+
+export function Footer({ user }: FooterProps) {
   const { isMobile } = useSidebar();
+  const { setTheme, theme } = useTheme();
 
   function handleLogout() {
     logout();
@@ -84,6 +93,22 @@ export function NavUser({
                 <Bell />
                 Notifications
               </DropdownMenuItem>
+
+              {theme === "dark" && (
+                <DropdownMenuItem onClick={() => setTheme("light")}>
+                  <Sun className="h-[1.2rem] w-[1.2rem]" />
+                  Light Mode
+                </DropdownMenuItem>
+              )}
+              {theme === "light" && (
+                <DropdownMenuItem
+                  className="dark:scale-0"
+                  onClick={() => setTheme("dark")}
+                >
+                  <Moon className="h-[1.2rem] w-[1.2rem]" />
+                  Dark Mode
+                </DropdownMenuItem>
+              )}
             </DropdownMenuGroup>
             <DropdownMenuSeparator />
             <DropdownMenuItem onClick={handleLogout}>
