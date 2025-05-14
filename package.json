@@ -7,7 +7,9 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "db:reset": "npx prisma migrate reset --force"
+    "db:migrate": "npx prisma migrate dev --name init",
+    "db:reset": "npx prisma migrate reset",
+    "db:seed": "npx prisma db seed"
   },
   "type": "module",
   "prisma": {
