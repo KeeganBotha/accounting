@@ -30,7 +30,7 @@ export function SideBarButton({ item }: SideBarButtonProps) {
         <CollapsibleTrigger asChild>
           <SidebarMenuButton tooltip={item.name}>
             <Icon iconName={item.iconName as any} />
-            <span>{item.name}</span>
+            <span className="capitalize">{item.name}</span>
             <Icon
               iconName="chevronDown"
               className="ml-auto transition-transform duration-200 group-data-[state=open]/collapsible:rotate-90"
@@ -43,7 +43,7 @@ export function SideBarButton({ item }: SideBarButtonProps) {
               <SidebarMenuSubItem key={subItem.id}>
                 <SidebarMenuSubButton asChild>
                   <a href={subItem.path}>
-                    <span>{subItem.name}</span>
+                    <span className="capitalize">{subItem.name}</span>
                   </a>
                 </SidebarMenuSubButton>
               </SidebarMenuSubItem>

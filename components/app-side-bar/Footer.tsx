@@ -33,7 +33,7 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 export function Footer() {
   const { data } = useSession();
   const { isMobile } = useSidebar();
-  const { setTheme, theme } = useTheme();
+  const { setTheme, resolvedTheme } = useTheme();
 
   if (!data) return <p>Not signed in</p>;
 
@@ -45,6 +45,8 @@ export function Footer() {
     logout();
     toast.success("Bye for now");
   }
+
+  debugger;
 
   return (
     <SidebarMenu>
@@ -96,13 +98,13 @@ export function Footer() {
                 Notifications
               </DropdownMenuItem>
 
-              {theme === "dark" && (
+              {resolvedTheme === "dark" && (
                 <DropdownMenuItem onClick={() => setTheme("light")}>
                   <Sun className="h-[1.2rem] w-[1.2rem]" />
                   Light Mode
                 </DropdownMenuItem>
               )}
-              {theme === "light" && (
+              {resolvedTheme === "light" && (
                 <DropdownMenuItem
                   className="dark:scale-0"
                   onClick={() => setTheme("dark")}
