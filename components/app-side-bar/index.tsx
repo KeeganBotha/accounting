@@ -17,7 +17,7 @@ import {
 
 import { Icon } from "../icon";
 import { Header } from "./Header";
-import { Footer } from "./Footer";
+import { Footer } from "./footer1";
 import { SideBarButton } from "./SideBarButton";
 
 type AppSidebarProps = {
