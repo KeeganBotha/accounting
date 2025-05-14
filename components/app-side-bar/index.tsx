@@ -17,8 +17,8 @@ import {
 
 import { Icon } from "../icon";
 import { Header } from "./Header";
-import { Footer } from "./footer1";
 import { SideBarButton } from "./SideBarButton";
+import { Footer } from "./Footer";
 
 type AppSidebarProps = {
   items: NonNullable<InferSafeActionFnResult<typeof getSideMenu>["data"]>;
