@@ -13,7 +13,7 @@ async function main() {
       {
         id: 2,
         name: "Reminders",
-        path: "",
+        path: "/private/reminders",
         iconName: "calendar",
       },
     ],

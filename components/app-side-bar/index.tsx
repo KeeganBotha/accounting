@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { InferSafeActionFnResult } from "next-safe-action";
 
 import { getSideMenu } from "@/app/private/action";
@@ -41,12 +42,14 @@ export function AppSidebar({ items }: AppSidebarProps) {
                 return <SideBarButton key={item.id} item={item} />;
 
               return (
-                <SidebarMenuItem key={item.id}>
-                  <SidebarMenuButton tooltip={item.name}>
-                    <Icon iconName={item.iconName as any} />
-                    <span>{item.name}</span>
-                  </SidebarMenuButton>
-                </SidebarMenuItem>
+                <Link href={item.path} key={item.id}>
+                  <SidebarMenuItem>
+                    <SidebarMenuButton tooltip={item.name}>
+                      <Icon iconName={item.iconName as any} />
+                      <span>{item.name}</span>
+                    </SidebarMenuButton>
+                  </SidebarMenuItem>
+                </Link>
               );
             })}
           </SidebarMenu>

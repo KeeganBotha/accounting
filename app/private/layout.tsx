@@ -1,8 +1,8 @@
-import { getSideMenu } from "./action";
-import { SidebarProvider } from "@/components/ui/sidebar";
-import { AppSidebar } from "@/components/app-side-bar";
-
 import { AppBar } from "@/components/app-bar";
+import { AppSidebar } from "@/components/app-side-bar";
+import { SidebarProvider } from "@/components/ui/sidebar";
+
+import { getSideMenu } from "./action";
 
 type LayoutProps = {
   children: React.ReactNode;
@@ -15,8 +15,9 @@ export default async function Layout({ children }: LayoutProps) {
   return (
     <SidebarProvider>
       <AppSidebar items={items} />
-      <AppBar />
-      <main>{children}</main>
+      <AppBar>
+        <main>{children}</main>
+      </AppBar>
     </SidebarProvider>
   );
 }
