@@ -41,7 +41,7 @@ export function AppSidebar({ items }: AppSidebarProps) {
                 return <SideBarButton key={item.id} item={item} />;
 
               return (
-                <SidebarMenuItem>
+                <SidebarMenuItem key={item.id}>
                   <SidebarMenuButton tooltip={item.name}>
                     <Icon iconName={item.iconName as any} />
                     <span>{item.name}</span>
