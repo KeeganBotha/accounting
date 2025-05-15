@@ -17,6 +17,8 @@ model User {
   id    Int     @id @default(autoincrement())
   email String  @unique
   lastLogin     DateTime
+  
+  accounts   Account[]
 
    @@map("user")
 }
@@ -31,4 +33,14 @@ model SideMenu {
   children SideMenu[] @relation("SideMenuToSelf")
 
   @@map("side_menu")
+}
+
+model Account {
+  id        Int     @id @default(autoincrement())
+  user_id   Int
+  user      User    @relation(fields: [user_id], references: [id])
+  name      String
+  is_shared Boolean
+
+  @@map("account")
 }
