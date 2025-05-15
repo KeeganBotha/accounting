@@ -14,33 +14,48 @@ datasource db {
 }
 
 model User {
-  id    Int     @id @default(autoincrement())
-  email String  @unique
-  lastLogin     DateTime
-  
-  accounts   Account[]
+  id          Int       @id @default(autoincrement())
+  email       String    @unique
+  lastLogin   DateTime
 
-   @@map("user")
+  accounts    Account[]
+
+  @@map("user")
 }
 
 model SideMenu {
-  id       Int       @id @default(autoincrement())
-  name     String
-  iconName String
-  path     String
-  parentId Int?     
-  parent   SideMenu? @relation("SideMenuToSelf", fields: [parentId], references: [id])
-  children SideMenu[] @relation("SideMenuToSelf")
+  id          Int         @id @default(autoincrement())
+  name        String
+  iconName    String
+  path        String
+  parentId    Int?     
+  parent      SideMenu?   @relation("SideMenuToSelf", fields: [parentId], references: [id])
+  children    SideMenu[]  @relation("SideMenuToSelf")
 
   @@map("side_menu")
 }
 
-model Account {
+model AccountType {
   id        Int     @id @default(autoincrement())
-  user_id   Int
-  user      User    @relation(fields: [user_id], references: [id])
   name      String
-  is_shared Boolean
+  iconName  String?
+  isSystem  Boolean  @default(false)
 
-  @@map("account")
+   accounts  Account[]
+
+  @@map("account_type")
+}
+
+model Account {
+  id              Int           @id @default(autoincrement())
+  userId          Int
+  user            User          @relation(fields: [userId], references: [id])
+  accountTypeId   Int
+  accountType     AccountType   @relation(fields: [accountTypeId], references: [id])
+  name            String
+  is_shared       Boolean       @default(false)
+  createdAt       DateTime      @default(now())
+  updatedAt       DateTime      @updatedAt
+
+  @@map("accounts")
 }

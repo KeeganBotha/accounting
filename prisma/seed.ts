@@ -32,6 +32,53 @@ async function main() {
       },
     ],
   });
+
+  await prisma.accountType.createMany({
+    data: [
+      {
+        id: 1,
+        name: "Current",
+        iconName: "landmark",
+        isSystem: true,
+      },
+      {
+        id: 2,
+        name: "Savings",
+        iconName: "piggyBank",
+        isSystem: true,
+      },
+      {
+        id: 3,
+        name: "Credit",
+        iconName: "creditCard",
+        isSystem: true,
+      },
+      {
+        id: 4,
+        name: "Cash",
+        iconName: "dollarSign",
+        isSystem: true,
+      },
+      {
+        id: 5,
+        name: "Investment",
+        iconName: "trendingUp",
+        isSystem: true,
+      },
+      {
+        id: 6,
+        name: "Loan",
+        iconName: "fileText",
+        isSystem: true,
+      },
+      {
+        id: 7,
+        name: "Retirement",
+        iconName: "umbrella",
+        isSystem: true,
+      },
+    ],
+  });
 }
 main()
   .then(async () => {

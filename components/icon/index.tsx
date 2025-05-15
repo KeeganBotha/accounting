@@ -8,6 +8,13 @@ import {
   Settings,
   Sun,
   Calendar,
+  Landmark,
+  PiggyBank,
+  CreditCard,
+  DollarSign,
+  TrendingUp,
+  FileText,
+  Umbrella,
 } from "lucide-react";
 import { cloneElement } from "react";
 
@@ -21,6 +28,13 @@ const icons = {
   chevronDown: <ChevronDown />,
   banknote: <Banknote />,
   calendar: <Calendar />,
+  landmark: <Landmark />,
+  piggyBank: <PiggyBank />,
+  creditCard: <CreditCard />,
+  dollarSign: <DollarSign />,
+  trendingUp: <TrendingUp />,
+  fileText: <FileText />,
+  umbrella: <Umbrella />,
 };
 
 export type IconName = keyof typeof icons;
