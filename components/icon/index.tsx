@@ -35,6 +35,7 @@ const icons = {
   trendingUp: <TrendingUp />,
   fileText: <FileText />,
   umbrella: <Umbrella />,
+  settingss: <Settings />,
 };
 
 export type IconName = keyof typeof icons;

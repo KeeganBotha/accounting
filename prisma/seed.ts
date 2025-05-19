@@ -30,6 +30,19 @@ async function main() {
         iconName: "",
         parentId: 2,
       },
+      {
+        id: 5,
+        name: "Settings",
+        path: "/private/settings/account-options",
+        iconName: "settingss",
+      },
+      {
+        id: 6,
+        name: "Account Options",
+        path: "/private/settings/account-options",
+        iconName: "",
+        parentId: 5,
+      },
     ],
   });
 
