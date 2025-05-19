@@ -15,6 +15,7 @@ import {
   TrendingUp,
   FileText,
   Umbrella,
+  Ellipsis,
 } from "lucide-react";
 import { cloneElement } from "react";
 
@@ -36,6 +37,7 @@ const icons = {
   fileText: <FileText />,
   umbrella: <Umbrella />,
   settingss: <Settings />,
+  ellipsis: <Ellipsis />,
 };
 
 export type IconName = keyof typeof icons;
