@@ -2,6 +2,16 @@ import { PrismaClient } from "@prisma/client";
 const prisma = new PrismaClient();
 
 async function main() {
+  await prisma.user.createMany({
+    data: [
+      {
+        id: 1,
+        email: "system@system.com",
+        lastLogin: new Date(),
+      },
+    ],
+  });
+
   await prisma.sideMenu.createMany({
     data: [
       {
@@ -52,43 +62,43 @@ async function main() {
         id: 1,
         name: "Current",
         iconName: "landmark",
-        isSystem: true,
+        createdBy: 1,
       },
       {
         id: 2,
         name: "Savings",
         iconName: "piggyBank",
-        isSystem: true,
+        createdBy: 1,
       },
       {
         id: 3,
         name: "Credit",
         iconName: "creditCard",
-        isSystem: true,
+        createdBy: 1,
       },
       {
         id: 4,
         name: "Cash",
         iconName: "dollarSign",
-        isSystem: true,
+        createdBy: 1,
       },
       {
         id: 5,
         name: "Investment",
         iconName: "trendingUp",
-        isSystem: true,
+        createdBy: 1,
       },
       {
         id: 6,
         name: "Loan",
         iconName: "fileText",
-        isSystem: true,
+        createdBy: 1,
       },
       {
         id: 7,
         name: "Retirement",
         iconName: "umbrella",
-        isSystem: true,
+        createdBy: 1,
       },
     ],
   });

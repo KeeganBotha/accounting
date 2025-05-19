@@ -19,6 +19,8 @@ model User {
   lastLogin   DateTime
 
   accounts    Account[]
+  accountTypes    AccountType[]
+
 
   @@map("user")
 }
@@ -36,12 +38,13 @@ model SideMenu {
 }
 
 model AccountType {
-  id        Int     @id @default(autoincrement())
+  id        Int       @id @default(autoincrement())
   name      String
   iconName  String?
-  isSystem  Boolean  @default(false)
+  createdBy Int 
+  creator   User      @relation(fields: [createdBy], references: [id])
 
-   accounts  Account[]
+  accounts  Account[]
 
   @@map("account_type")
 }

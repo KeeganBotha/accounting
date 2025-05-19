@@ -1,19 +1,10 @@
-import { columns, Payment } from "./columnts";
-import { DataTable } from "./data-table";
+import { DataTable } from "@/components/data-table";
+import { columns } from "./columnts";
+import { getAccountTypes } from "./action";
 
-async function getData(): Promise<Payment[]> {
-  return [
-    {
-      id: "728ed52f",
-      amount: 100,
-      status: "pending",
-      email: "m@example.com",
-    },
-  ];
-}
-
-export default async function DemoPage() {
-  const data = await getData();
+export default async function Page() {
+  const query = await getAccountTypes();
+  const data = query?.data?.result ?? [];
 
   return (
     <div className="container mx-auto py-10">
