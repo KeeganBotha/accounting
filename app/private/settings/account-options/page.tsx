@@ -1,5 +1,4 @@
-import { DataTable } from "@/components/data-table";
-import { columns } from "./columnts";
+import { OptionsCrud } from "@/components/optionsCrud";
 import { getAccountTypes } from "./action";
 
 export default async function Page() {
@@ -8,7 +7,7 @@ export default async function Page() {
 
   return (
     <div className="container mx-auto py-10">
-      <DataTable columns={columns} data={data} />
+      <OptionsCrud data={data} />
     </div>
   );
 }
