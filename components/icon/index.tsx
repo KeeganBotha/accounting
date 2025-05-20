@@ -16,6 +16,9 @@ import {
   FileText,
   Umbrella,
   Ellipsis,
+  Edit,
+  Trash,
+  Pen,
 } from "lucide-react";
 import { cloneElement } from "react";
 
@@ -38,6 +41,8 @@ const icons = {
   umbrella: <Umbrella />,
   settingss: <Settings />,
   ellipsis: <Ellipsis />,
+  delete: <Trash />,
+  edit: <Pen />,
 };
 
 export type IconName = keyof typeof icons;

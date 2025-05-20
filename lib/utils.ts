@@ -6,12 +6,10 @@ export function cn(...inputs: ClassValue[]) {
 }
 
 export function asOption<T extends { id: number }>(
-  obj: T | null | undefined,
+  obj: T,
   text: keyof Omit<T, "id">,
   iconName: keyof Omit<T, "id">
 ) {
-  if (!obj) return null;
-
   return {
     value: obj.id.toString(),
     text: (obj[text] as any).toString() as string,

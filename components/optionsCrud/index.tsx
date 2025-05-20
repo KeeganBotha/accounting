@@ -1,13 +1,48 @@
+import { Icon } from "../icon";
+import { Button } from "../ui/button";
+import { Card, CardContent } from "../ui/card";
+
 type OptionsCrudProps = {
   data: OptionType[];
 };
 
 export function OptionsCrud({ data }: OptionsCrudProps) {
   return (
-    <div>
-      {data.map((option) => {
-        return <div key={option.value}>{option.text}</div>;
-      })}
+    <div className="flex grow">
+      <div className="flex grow flex-col gap-4">
+        {data.map((option) => {
+          return <OptionCard key={option.value} data={option} />;
+        })}
+      </div>
     </div>
+  );
+}
+
+type OptionCardProps = {
+  data: OptionType;
+};
+
+function OptionCard({ data }: OptionCardProps) {
+  const { iconName, text, value } = data;
+
+  return (
+    <Card>
+      <CardContent>
+        <div className="flex flex-row justify-between items-center">
+          <div className="flex flex-col gap-2">
+            <p>{text}</p>
+            <p className="text-xs text-muted-foreground">{iconName}</p>
+          </div>
+          <div className="flex gap-4">
+            <Button variant="outline" size="icon">
+              <Icon iconName="edit" />
+            </Button>
+            <Button variant="outline" size="icon">
+              <Icon iconName="delete" />
+            </Button>
+          </div>
+        </div>
+      </CardContent>
+    </Card>
   );
 }
