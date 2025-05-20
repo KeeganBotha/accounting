@@ -14,10 +14,14 @@ export default async function Layout({ children }: LayoutProps) {
 
   return (
     <SidebarProvider>
-      <AppSidebar items={items} />
-      <AppBar>
-        <main>{children}</main>
-      </AppBar>
+      <div className="flex h-screen overflow-hidden">
+        <AppSidebar items={items} />
+        <div className="flex flex-col flex-grow overflow-auto">
+          <AppBar>
+            <main className="flex-grow overflow-auto">{children}</main>
+          </AppBar>
+        </div>
+      </div>
     </SidebarProvider>
   );
 }
