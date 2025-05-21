@@ -8,13 +8,10 @@ type OptionsCrudProps = {
 
 export function OptionsCrud({ data }: OptionsCrudProps) {
   return (
-    <div className="flex grow">
-      <div className="flex grow flex-col gap-4 sm:flex-row sm:flex-wrap">
+    <div className="flex ">
+      <div className="flex flex-col gap-4 sm:flex-row sm:flex-wrap sm:items-start w-full">
         {data.map((option) => {
           return <OptionCard key={option.value} data={option} />;
-        })}
-        {data.map((option) => {
-          return <OptionCard key={option.value + "1"} data={option} />;
         })}
       </div>
     </div>
@@ -29,7 +26,7 @@ function OptionCard({ data }: OptionCardProps) {
   const { iconName, text, value } = data;
 
   return (
-    <Card className="min-w-[19rem] w-full">
+    <Card className="min-w-[19rem] h-fit">
       <CardContent>
         <div className="flex flex-row justify-between items-center">
           <div className="flex flex-col gap-2">
