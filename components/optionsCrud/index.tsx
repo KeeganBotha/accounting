@@ -13,6 +13,9 @@ export function OptionsCrud({ data }: OptionsCrudProps) {
         {data.map((option) => {
           return <OptionCard key={option.value} data={option} />;
         })}
+        {data.map((option) => {
+          return <OptionCard key={option.value + "1"} data={option} />;
+        })}
       </div>
     </div>
   );
