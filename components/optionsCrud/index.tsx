@@ -45,14 +45,16 @@ function OptionCard({ data }: OptionCardProps) {
           </div>
           <div className="flex gap-4">
             <ActionDialog
-              title={"Delete " + text}
-              description={"Really Delete?"}
-              onSubmit={() => {}}
-            />
-            <ActionDialog
               title={"Edit " + text}
               description={"You are editting"}
               onSubmit={() => {}}
+              iconName={"edit"}
+            />
+            <ActionDialog
+              title={"Delete " + text}
+              description={"Really Delete?"}
+              onSubmit={() => {}}
+              iconName={"delete"}
             />
           </div>
         </div>
@@ -65,14 +67,20 @@ type ActionDialogProps = {
   title: string;
   description: string | React.ReactNode;
   onSubmit: () => void;
+  iconName: string;
 };
 
-function ActionDialog({ description, onSubmit, title }: ActionDialogProps) {
+function ActionDialog({
+  description,
+  onSubmit,
+  title,
+  iconName,
+}: ActionDialogProps) {
   return (
     <Dialog>
       <DialogTrigger asChild>
         <Button variant="outline" size="icon">
-          <Icon iconName="delete" />
+          <Icon iconName={iconName as any} />
         </Button>
       </DialogTrigger>
 
