@@ -1,6 +1,9 @@
+"use client";
+
 import { splitCamelCase } from "@/lib/utils";
 import { Icon } from "../icon";
 import { Button } from "../ui/button";
+import { zodResolver } from "@hookform/resolvers/zod";
 import { Card, CardContent } from "../ui/card";
 import {
   Dialog,
@@ -10,6 +13,10 @@ import {
 } from "../ui/dialog";
 import { DialogDescription } from "@radix-ui/react-dialog";
 import { Input } from "../ui/input";
+import { FormProvider, useForm } from "react-hook-form";
+import { OptionSchema } from "./schema";
+import { RHFInput } from "../controlled-components/RHFInput";
+import { Label } from "../ui/label";
 
 type OptionsCrudProps = {
   data: OptionType[];
@@ -19,8 +26,8 @@ export function OptionsCrud({ data }: OptionsCrudProps) {
   return (
     <div className="flex flex-col gap-4">
       <div className="flex flex-row justify-between">
-        <Input />
-        <Button>Add</Button>
+        <Input placeholder="Search..." className="max-w-xs" />
+        <MutateOptionDialog />
       </div>
 
       <div className="flex flex-col gap-4 sm:flex-row sm:flex-wrap sm:items-start w-full">
@@ -93,6 +100,37 @@ function ActionDialog({
       <DialogContent>
         <DialogTitle>{title}</DialogTitle>
         <DialogDescription>{description}</DialogDescription>
+      </DialogContent>
+    </Dialog>
+  );
+}
+
+function MutateOptionDialog() {
+  const formMethods = useForm({
+    resolver: zodResolver(OptionSchema),
+    defaultValues: {
+      text: "",
+      value: "0",
+      iconName: "",
+    },
+  });
+
+  return (
+    <Dialog>
+      <DialogTrigger asChild>
+        <Button>
+          <Icon iconName="add" /> Add
+        </Button>
+      </DialogTrigger>
+      <DialogContent>
+        <DialogTitle>Create Option</DialogTitle>
+        <DialogDescription hidden />
+        <FormProvider {...formMethods}>
+          <form>
+            <Label htmlFor="text">Option</Label>
+            <RHFInput name="text" />
+          </form>
+        </FormProvider>
       </DialogContent>
     </Dialog>
   );
