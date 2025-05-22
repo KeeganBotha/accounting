@@ -9,6 +9,7 @@ import {
   DialogTrigger,
 } from "../ui/dialog";
 import { DialogDescription } from "@radix-ui/react-dialog";
+import { Input } from "../ui/input";
 
 type OptionsCrudProps = {
   data: OptionType[];
@@ -16,7 +17,12 @@ type OptionsCrudProps = {
 
 export function OptionsCrud({ data }: OptionsCrudProps) {
   return (
-    <div className="flex ">
+    <div className="flex flex-col gap-4">
+      <div className="flex flex-row justify-between">
+        <Input />
+        <Button>Add</Button>
+      </div>
+
       <div className="flex flex-col gap-4 sm:flex-row sm:flex-wrap sm:items-start w-full">
         {data.map((option) => {
           return <OptionCard key={option.value} data={option} />;

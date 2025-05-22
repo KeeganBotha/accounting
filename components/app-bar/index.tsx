@@ -49,9 +49,11 @@ export function AppBar({ children }: AppBarProps) {
           </Breadcrumb>
         </div>
       </header>
-      <main className="flex flex-1 flex-col gap-4 p-4 pt-0 flex-grow overflow-auto">
-        {children}
-      </main>
+      <div className="flex flex-col justify-center flex-grow gap-4 p-4 pt-0  overflow-auto items-center">
+        <main className="flex flex-1 flex-col flex-grow max-w-screen-2xl items-center">
+          {children}
+        </main>
+      </div>
     </SidebarInset>
   );
 }
