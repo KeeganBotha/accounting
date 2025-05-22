@@ -2,6 +2,13 @@ import { splitCamelCase } from "@/lib/utils";
 import { Icon } from "../icon";
 import { Button } from "../ui/button";
 import { Card, CardContent } from "../ui/card";
+import {
+  Dialog,
+  DialogContent,
+  DialogTitle,
+  DialogTrigger,
+} from "../ui/dialog";
+import { DialogDescription } from "@radix-ui/react-dialog";
 
 type OptionsCrudProps = {
   data: OptionType[];
@@ -37,15 +44,42 @@ function OptionCard({ data }: OptionCardProps) {
             </p>
           </div>
           <div className="flex gap-4">
-            <Button variant="outline" size="icon">
-              <Icon iconName="edit" />
-            </Button>
-            <Button variant="outline" size="icon">
-              <Icon iconName="delete" />
-            </Button>
+            <ActionDialog
+              title={"Delete " + text}
+              description={"Really Delete?"}
+              onSubmit={() => {}}
+            />
+            <ActionDialog
+              title={"Edit " + text}
+              description={"You are editting"}
+              onSubmit={() => {}}
+            />
           </div>
         </div>
       </CardContent>
     </Card>
+  );
+}
+
+type ActionDialogProps = {
+  title: string;
+  description: string | React.ReactNode;
+  onSubmit: () => void;
+};
+
+function ActionDialog({ description, onSubmit, title }: ActionDialogProps) {
+  return (
+    <Dialog>
+      <DialogTrigger asChild>
+        <Button variant="outline" size="icon">
+          <Icon iconName="delete" />
+        </Button>
+      </DialogTrigger>
+
+      <DialogContent>
+        <DialogTitle>{title}</DialogTitle>
+        <DialogDescription>{description}</DialogDescription>
+      </DialogContent>
+    </Dialog>
   );
 }
