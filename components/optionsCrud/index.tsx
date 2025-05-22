@@ -1,3 +1,4 @@
+import { splitCamelCase } from "@/lib/utils";
 import { Icon } from "../icon";
 import { Button } from "../ui/button";
 import { Card, CardContent } from "../ui/card";
@@ -31,7 +32,9 @@ function OptionCard({ data }: OptionCardProps) {
         <div className="flex flex-row justify-between items-center">
           <div className="flex flex-col gap-2">
             <p>{text}</p>
-            <p className="text-xs text-muted-foreground">{iconName}</p>
+            <p className="text-xs text-muted-foreground capitalize">
+              {splitCamelCase(iconName)}
+            </p>
           </div>
           <div className="flex gap-4">
             <Button variant="outline" size="icon">

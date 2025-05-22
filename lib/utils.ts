@@ -16,3 +16,10 @@ export function asOption<T extends { id: number }>(
     iconName: (obj[iconName] as any).toString() as string,
   };
 }
+
+export function splitCamelCase(word: string) {
+  const words = word.split(/(?=[A-Z])/);
+  const result = words.join(" ");
+
+  return result;
+}
