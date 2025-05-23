@@ -17,6 +17,7 @@ import { FormProvider, useForm } from "react-hook-form";
 import { OptionSchema } from "./schema";
 import { RHFInput } from "../controlled-components/RHFInput";
 import { Label } from "../ui/label";
+import { FormButtons } from "../controlled-components/FormButtons";
 
 type OptionsCrudProps = {
   data: OptionType[];
@@ -127,8 +128,8 @@ function MutateOptionDialog() {
         <DialogDescription hidden />
         <FormProvider {...formMethods}>
           <form>
-            <Label htmlFor="text">Option</Label>
-            <RHFInput name="text" />
+            <RHFInput label="Type" name="text" />
+            <FormButtons />
           </form>
         </FormProvider>
       </DialogContent>
