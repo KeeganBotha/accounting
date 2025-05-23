@@ -19,6 +19,7 @@ import {
   Trash,
   Pen,
   Plus,
+  LoaderCircle,
 } from "lucide-react";
 import { cloneElement } from "react";
 
@@ -44,6 +45,7 @@ const icons = {
   delete: <Trash />,
   edit: <Pen />,
   add: <Plus />,
+  loading: <LoaderCircle />,
 };
 
 export type IconName = keyof typeof icons;

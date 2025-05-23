@@ -1,22 +1,24 @@
 "use client";
 
-import { splitCamelCase } from "@/lib/utils";
-import { Icon } from "../icon";
-import { Button } from "../ui/button";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Card, CardContent } from "../ui/card";
+import { FormProvider, useForm } from "react-hook-form";
+import { DialogDescription } from "@radix-ui/react-dialog";
+
+import { splitCamelCase } from "@/lib/utils";
+
 import {
   Dialog,
   DialogContent,
   DialogTitle,
   DialogTrigger,
 } from "../ui/dialog";
-import { DialogDescription } from "@radix-ui/react-dialog";
+import { Icon } from "../icon";
 import { Input } from "../ui/input";
-import { FormProvider, useForm } from "react-hook-form";
+import { Button } from "../ui/button";
 import { OptionSchema } from "./schema";
+import { Card, CardContent } from "../ui/card";
 import { RHFInput } from "../controlled-components/RHFInput";
-import { Label } from "../ui/label";
+import { RHFSelect } from "../controlled-components/RHFSelect";
 import { FormButtons } from "../controlled-components/FormButtons";
 
 type OptionsCrudProps = {
@@ -129,6 +131,7 @@ function MutateOptionDialog() {
         <FormProvider {...formMethods}>
           <form>
             <RHFInput label="Type" name="text" />
+            <RHFSelect label="" name="" options={[]} />
             <FormButtons />
           </form>
         </FormProvider>
