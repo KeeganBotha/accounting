@@ -1,3 +1,4 @@
+import { splitCamelCase } from "@/lib/utils";
 import {
   Banknote,
   ChevronDown,
@@ -24,28 +25,27 @@ import {
 import { cloneElement } from "react";
 
 const icons = {
-  house: <House />,
-  settings: <Settings />,
-  menu: <Menu />,
-  moon: <Moon />,
-  sun: <Sun />,
-  logout: <LogOut />,
-  chevronDown: <ChevronDown />,
-  banknote: <Banknote />,
-  calendar: <Calendar />,
-  landmark: <Landmark />,
-  piggyBank: <PiggyBank />,
-  creditCard: <CreditCard />,
-  dollarSign: <DollarSign />,
-  trendingUp: <TrendingUp />,
-  fileText: <FileText />,
-  umbrella: <Umbrella />,
-  settingss: <Settings />,
-  ellipsis: <Ellipsis />,
-  delete: <Trash />,
-  edit: <Pen />,
-  add: <Plus />,
-  loading: <LoaderCircle />,
+  House: <House />,
+  Menu: <Menu />,
+  Moon: <Moon />,
+  Sun: <Sun />,
+  Logout: <LogOut />,
+  ChevronDown: <ChevronDown />,
+  Banknote: <Banknote />,
+  Calendar: <Calendar />,
+  Landmark: <Landmark />,
+  PiggyBank: <PiggyBank />,
+  CreditCard: <CreditCard />,
+  DollarSign: <DollarSign />,
+  TrendingUp: <TrendingUp />,
+  FileText: <FileText />,
+  Umbrella: <Umbrella />,
+  Settingss: <Settings />,
+  Ellipsis: <Ellipsis />,
+  Delete: <Trash />,
+  Edit: <Pen />,
+  Add: <Plus />,
+  Loading: <LoaderCircle />,
 };
 
 export type IconName = keyof typeof icons;
@@ -58,3 +58,11 @@ type IconProps = {
 export function Icon({ iconName, className = "" }: IconProps) {
   return cloneElement(icons[iconName], { className });
 }
+
+export const ICON_OPTIONS: OptionType[] = Object.keys(icons).map(
+  (iconName) => ({
+    text: splitCamelCase(iconName),
+    value: iconName,
+    iconName: iconName,
+  })
+);

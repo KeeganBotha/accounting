@@ -18,13 +18,13 @@ export function FormButtons({ onSubmit, onReset }: FormButtonsProps) {
     <div className="flex flex-row gap-4 items-center justify-center">
       <Button type="reset" variant="secondary">
         {isSubmitting ? (
-          <Icon iconName="loading" className="animate-spin" />
+          <Icon iconName="Loading" className="animate-spin" />
         ) : null}
         Reset
       </Button>
       <Button type="submit">
         {isSubmitting ? (
-          <Icon iconName="loading" className="animate-spin" />
+          <Icon iconName="Loading" className="animate-spin" />
         ) : null}
         Submit
       </Button>

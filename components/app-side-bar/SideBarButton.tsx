@@ -32,7 +32,7 @@ export function SideBarButton({ item }: SideBarButtonProps) {
             <Icon iconName={item.iconName as any} />
             <span className="capitalize">{item.name}</span>
             <Icon
-              iconName="chevronDown"
+              iconName="ChevronDown"
               className="ml-auto transition-transform duration-200 group-data-[state=open]/collapsible:rotate-90"
             />
           </SidebarMenuButton>

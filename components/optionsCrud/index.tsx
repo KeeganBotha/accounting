@@ -12,7 +12,7 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "../ui/dialog";
-import { Icon } from "../icon";
+import { Icon, ICON_OPTIONS, IconName } from "../icon";
 import { Input } from "../ui/input";
 import { Button } from "../ui/button";
 import { OptionSchema } from "./schema";
@@ -64,13 +64,13 @@ function OptionCard({ data }: OptionCardProps) {
               title={"Edit " + text}
               description={"You are editting"}
               onSubmit={() => {}}
-              iconName={"edit"}
+              iconName={"Edit"}
             />
             <ActionDialog
               title={"Delete " + text}
               description={"Really Delete?"}
               onSubmit={() => {}}
-              iconName={"delete"}
+              iconName={"Delete"}
             />
           </div>
         </div>
@@ -83,7 +83,7 @@ type ActionDialogProps = {
   title: string;
   description: string | React.ReactNode;
   onSubmit: () => void;
-  iconName: string;
+  iconName: IconName;
 };
 
 function ActionDialog({
@@ -96,7 +96,7 @@ function ActionDialog({
     <Dialog>
       <DialogTrigger asChild>
         <Button variant="outline" size="icon">
-          <Icon iconName={iconName as any} />
+          <Icon iconName={iconName} />
         </Button>
       </DialogTrigger>
 
@@ -122,7 +122,7 @@ function MutateOptionDialog() {
     <Dialog>
       <DialogTrigger asChild>
         <Button>
-          <Icon iconName="add" /> Add
+          <Icon iconName="Add" /> Add
         </Button>
       </DialogTrigger>
       <DialogContent>
@@ -131,7 +131,7 @@ function MutateOptionDialog() {
         <FormProvider {...formMethods}>
           <form>
             <RHFInput label="Type" name="text" />
-            <RHFSelect label="" name="" options={[]} />
+            <RHFSelect label="" name="" options={ICON_OPTIONS} />
             <FormButtons />
           </form>
         </FormProvider>

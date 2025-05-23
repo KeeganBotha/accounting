@@ -15,7 +15,7 @@ import {
   SidebarRail,
 } from "@/components/ui/sidebar";
 
-import { Icon } from "../icon";
+import { Icon, IconName } from "../icon";
 import { Header } from "./Header";
 import { SideBarButton } from "./SideBarButton";
 import { Footer } from "./Footer";
@@ -45,7 +45,7 @@ export function AppSidebar({ items }: AppSidebarProps) {
                 <Link href={item.path} key={item.id}>
                   <SidebarMenuItem>
                     <SidebarMenuButton tooltip={item.name}>
-                      <Icon iconName={item.iconName as any} />
+                      <Icon iconName={item.iconName as IconName} />
                       <span>{item.name}</span>
                     </SidebarMenuButton>
                   </SidebarMenuItem>
