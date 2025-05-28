@@ -1,5 +1,5 @@
-import { Icon } from "../icon";
-import { Button } from "../ui/button";
+"use client";
+
 import {
   Dialog,
   DialogClose,
@@ -8,9 +8,11 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "../ui/dialog";
+import { Icon } from "../icon";
+import { Button } from "../ui/button";
 
 type DeleteDialogProps = {
-  onDelete: (value: string) => void;
+  onDelete: () => void;
   name: string;
 };
 
@@ -32,7 +34,7 @@ export function DeleteDialog({ onDelete, name }: DeleteDialogProps) {
           <DialogClose asChild>
             <Button variant="secondary">Cancel</Button>
           </DialogClose>
-          <Button>Delete</Button>
+          <Button onClick={onDelete}>Delete</Button>
         </div>
       </DialogContent>
     </Dialog>
