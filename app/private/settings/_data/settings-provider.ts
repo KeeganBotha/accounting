@@ -4,10 +4,9 @@ export function settingsProvider(serverCtx: ServerCtxType) {
   async function getAccountTypes() {
     const result = await _db.accountType.findMany({
       where: {
-        // createdBy:{
-        //   in: [1 ]
-        // }
-        //Once we get the context passing down to the provider we can refine this
+        createdBy: {
+          in: [1, serverCtx.id],
+        },
       },
     });
 
@@ -39,9 +38,12 @@ export function settingsProvider(serverCtx: ServerCtxType) {
     const result = await _db.accountType.delete({
       where: {
         id: id,
-        //if you not the creator, throw nice permissions error
+        createdBy: serverCtx.id,
       },
     });
+
+    if (!result)
+      throw new Error("You dont have the permissions to delete that option.");
 
     return result;
   }

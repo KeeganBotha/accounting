@@ -2,6 +2,7 @@ import { createSafeActionClient } from "next-safe-action";
 
 import { auth } from "@/auth";
 import { _db } from "@/database/db";
+
 import { getErrorMessage } from "./get-error-message";
 import { serviceFactory } from "./service-factory";
 
@@ -21,8 +22,8 @@ export const privateProcedure = safeAction.use(async ({ next }) => {
   }
 
   const serverCtx = {
-    id: session.user?.id ?? 0,
-  }; // removed the body from here
+    id: +(session.user?.id ?? 0),
+  };
 
   const _serviceFactory = serviceFactory(serverCtx);
 
