@@ -45,10 +45,10 @@ export function MutateDialog({
         <DialogTitle>{title}</DialogTitle>
         <DialogDescription hidden />
         <FormProvider {...formMethods}>
-          <form>
+          <form className="flex flex-col gap-4">
             <RHFInput label="Type" name="text" />
             <RHFSelect label="" name="" options={ICON_OPTIONS} />
-            <div className="flex flex-row gap-4 items-center">
+            <div className="flex flex-row justify-between">
               <DialogClose asChild>
                 <Button variant="secondary">Cancel</Button>
               </DialogClose>

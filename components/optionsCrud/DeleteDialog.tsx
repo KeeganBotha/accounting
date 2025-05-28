@@ -28,7 +28,7 @@ export function DeleteDialog({ onDelete, name }: DeleteDialogProps) {
         <DialogDescription>
           Are you sure you want to delete {name}?
         </DialogDescription>
-        <div className="flex flex-row gap-4 items-center">
+        <div className="flex flex-row justify-between">
           <DialogClose asChild>
             <Button variant="secondary">Cancel</Button>
           </DialogClose>

@@ -10,6 +10,7 @@ import {
   SelectValue,
 } from "../ui/select";
 import { Label } from "../ui/label";
+import { Icon } from "../icon";
 
 type RHFSelectProps = {
   name: string;
@@ -49,13 +50,14 @@ type SelectProps = {
 function Select({ options, value, onChange }: SelectProps) {
   return (
     <SelectContainer onValueChange={onChange} defaultValue={value}>
-      <SelectTrigger>
+      <SelectTrigger className="w-full">
         <SelectValue placeholder="Select a verified email to display" />
       </SelectTrigger>
       <SelectContent>
         {options.map((option) => {
           return (
             <SelectItem key={option.value} value={option.value}>
+              <Icon iconName={option.iconName} />
               {option.text}
             </SelectItem>
           );
