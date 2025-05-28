@@ -8,9 +8,9 @@ import { MutateDialog } from "./MutateDialog";
 
 type OptionsCrudProps = {
   data: OptionType[];
-  onEdit: (option: OptionType) => void;
-  onAdd: (option: OptionType) => void;
-  onDelete: (value: string) => void;
+  onEdit: () => Promise<void>;
+  onAdd: () => Promise<void>;
+  onDelete: () => Promise<void>;
 };
 
 export function OptionsCrud({
