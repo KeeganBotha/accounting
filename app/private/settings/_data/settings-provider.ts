@@ -1,6 +1,6 @@
 import { _db } from "@/database/db";
 
-export function settingsProvider() {
+export function settingsProvider(serverCtx: ServerCtxType) {
   async function getAccountTypes() {
     const result = await _db.accountType.findMany({
       where: {
@@ -36,7 +36,12 @@ export function settingsProvider() {
   }
 
   async function deleteAccountType(id: number) {
-    const result = await _db;
+    const result = await _db.accountType.delete({
+      where: {
+        id: id,
+        //if you not the creator, throw nice permissions error
+      },
+    });
 
     return result;
   }

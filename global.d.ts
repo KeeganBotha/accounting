@@ -3,3 +3,7 @@ type OptionType = {
   value: string;
   iconName: IconName;
 };
+
+type ServerCtxType = {
+  id: number;
+};

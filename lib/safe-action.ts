@@ -20,9 +20,11 @@ export const privateProcedure = safeAction.use(async ({ next }) => {
     throw new Error("no ctx found in the safe action");
   }
 
-  const serverCtx = {}; // removed the body from here
+  const serverCtx = {
+    id: session.user?.id ?? 0,
+  }; // removed the body from here
 
-  const _serviceFactory = serviceFactory();
+  const _serviceFactory = serviceFactory(serverCtx);
 
   return next({
     ctx: {
