@@ -13,7 +13,21 @@ export function settingsService() {
     return result;
   }
 
+  async function mutateAccountType(input: OptionType) {
+    const result = await _provider.mutateAccountType(input);
+
+    return result;
+  }
+
+  async function deleteAccountType(id: number) {
+    const result = await _provider.deleteAccountType(id);
+
+    return result;
+  }
+
   return {
     getAccountTypes,
+    mutateAccountType,
+    deleteAccountType,
   };
 }

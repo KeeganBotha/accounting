@@ -14,7 +14,36 @@ export function settingsProvider() {
     return result;
   }
 
+  async function mutateAccountType(input: OptionType) {
+    const { iconName, text, value } = input;
+
+    const result = await _db.accountType.upsert({
+      create: {
+        name: text,
+        iconName: iconName,
+        createdBy: 1,
+      },
+      update: {
+        name: text,
+        iconName: iconName,
+      },
+      where: {
+        id: +value,
+      },
+    });
+
+    return result;
+  }
+
+  async function deleteAccountType(id: number) {
+    const result = await _db;
+
+    return result;
+  }
+
   return {
     getAccountTypes,
+    mutateAccountType,
+    deleteAccountType,
   };
 }
