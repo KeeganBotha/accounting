@@ -1,18 +1,25 @@
+"use client";
+
 import { splitCamelCase } from "@/lib/utils";
-import { Card, CardContent } from "../ui/card";
-import { MutateDialog } from "./MutateDialog";
-import { Button } from "../ui/button";
+
 import { Icon } from "../icon";
+import { Button } from "../ui/button";
 import { DeleteDialog } from "./DeleteDialog";
+import { MutateDialog } from "./MutateDialog";
+import { Card, CardContent } from "../ui/card";
 
 type OptionCardProps = {
   data: OptionType;
-  onEdit: (option: OptionType) => void;
-  onDelete: (value: string) => void;
+  onEdit: (option: OptionType) => Promise<void>;
+  onDelete: (id: number) => Promise<void>;
 };
 
 export function OptionCard({ data, onDelete, onEdit }: OptionCardProps) {
   const { iconName, text, value } = data;
+
+  function handleDelete() {
+    onDelete(+(value ?? 0));
+  }
 
   return (
     <Card className="min-w-[19rem] h-fit">
@@ -30,7 +37,7 @@ export function OptionCard({ data, onDelete, onEdit }: OptionCardProps) {
                 <Icon iconName="Edit" />
               </Button>
             </MutateDialog>
-            <DeleteDialog onDelete={onDelete} name={text} />
+            <DeleteDialog onDelete={handleDelete} name={text} />
           </div>
         </div>
       </CardContent>

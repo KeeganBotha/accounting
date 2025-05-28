@@ -1,5 +1,9 @@
-import { clsx, type ClassValue } from "clsx";
+import { toast } from "sonner";
 import { twMerge } from "tailwind-merge";
+import { clsx, type ClassValue } from "clsx";
+import { SafeActionResult } from "next-safe-action";
+
+import { getErrorMessage } from "./get-error-message";
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
@@ -22,4 +26,26 @@ export function splitCamelCase(word: string) {
   const result = words.join(" ");
 
   return result;
+}
+
+export function handleSafeActionResult<T>(
+  result: SafeActionResult<any, any, any, any, any, T> | undefined
+) {
+  if (!result) throw new Error("Result cannot be undefined.");
+
+  if (result.serverError && global.window && !!window.location) {
+    toast.error(getErrorMessage(result.serverError));
+  }
+
+  if (
+    !!result?.data &&
+    typeof result.data == "object" &&
+    "message" in result.data &&
+    global.window &&
+    !!window.location
+  ) {
+    toast.success(getErrorMessage(result.data.message));
+  }
+
+  return result.data as NonNullable<T>;
 }

@@ -1,9 +1,9 @@
-import { OptionsCrud } from "@/components/optionsCrud";
 import { getAccountTypes } from "./action";
+import { AccountOptions } from "./AccountOptions";
 
 export default async function Page() {
   const query = await getAccountTypes();
-  const data = query?.data?.result ?? [];
+  const options = query?.data?.result ?? [];
 
-  return <OptionsCrud data={data} />;
+  return <AccountOptions options={options} />;
 }

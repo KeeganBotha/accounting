@@ -7,23 +7,17 @@ import { OptionCard } from "./OptionCard";
 import { MutateDialog } from "./MutateDialog";
 
 type OptionsCrudProps = {
-  data: OptionType[];
-  onEdit: () => Promise<void>;
-  onAdd: () => Promise<void>;
-  onDelete: () => Promise<void>;
+  options: OptionType[];
+  onMutate: (option: OptionType) => Promise<void>;
+  onDelete: (id: number) => Promise<void>;
 };
 
-export function OptionsCrud({
-  data,
-  onAdd,
-  onDelete,
-  onEdit,
-}: OptionsCrudProps) {
+export function OptionsCrud({ onMutate, options, onDelete }: OptionsCrudProps) {
   return (
     <div className="flex flex-col gap-4">
       <div className="flex flex-row justify-between">
         <Input placeholder="Search..." className="max-w-xs" />
-        <MutateDialog onSubmit={onAdd} title="Add Option">
+        <MutateDialog onSubmit={onMutate} title="Add Option">
           <Button>
             <Icon iconName="Add" /> Add
           </Button>
@@ -31,13 +25,13 @@ export function OptionsCrud({
       </div>
 
       <div className="flex flex-col gap-4 sm:flex-row sm:flex-wrap sm:items-start w-full">
-        {data.map((option) => {
+        {options.map((option) => {
           return (
             <OptionCard
               key={option.value}
               data={option}
               onDelete={onDelete}
-              onEdit={onEdit}
+              onEdit={onMutate}
             />
           );
         })}
