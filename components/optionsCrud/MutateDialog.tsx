@@ -59,7 +59,9 @@ export function MutateDialog({
               <DialogClose asChild>
                 <Button variant="secondary">Cancel</Button>
               </DialogClose>
-              <Button>Submit</Button>
+              <DialogClose asChild>
+                <Button type="submit">Submit</Button>
+              </DialogClose>
             </div>
           </form>
         </FormProvider>
