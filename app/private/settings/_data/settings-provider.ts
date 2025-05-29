@@ -20,7 +20,7 @@ export function settingsProvider(serverCtx: ServerCtxType) {
       create: {
         name: text,
         iconName: iconName,
-        createdBy: 1,
+        createdBy: serverCtx.id,
       },
       update: {
         name: text,

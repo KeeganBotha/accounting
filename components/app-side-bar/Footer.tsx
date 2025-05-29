@@ -46,8 +46,6 @@ export function Footer() {
     toast.success("Bye for now");
   }
 
-  debugger;
-
   return (
     <SidebarMenu>
       <SidebarMenuItem>

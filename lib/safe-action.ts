@@ -22,7 +22,7 @@ export const privateProcedure = safeAction.use(async ({ next }) => {
   }
 
   const serverCtx = {
-    id: +(session.user?.id ?? 0),
+    id: +((session as any).userId ?? 0),
   };
 
   const _serviceFactory = serviceFactory(serverCtx);

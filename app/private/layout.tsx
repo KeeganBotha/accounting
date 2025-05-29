@@ -14,9 +14,9 @@ export default async function Layout({ children }: LayoutProps) {
 
   return (
     <SidebarProvider>
-      <div className="flex flex-grow h-screen overflow-hidden">
+      <div className="flex flex-grow h-screen overflow-hidden ">
         <AppSidebar items={items} />
-        <div className="flex h-screen flex-col flex-grow">
+        <div className="flex h-screen flex-col flex-grow w-full">
           <AppBar>{children}</AppBar>
         </div>
       </div>

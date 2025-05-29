@@ -22,10 +22,10 @@ export function OptionCard({ option, onDelete, onEdit }: OptionCardProps) {
   }
 
   return (
-    <Card className="min-w-[19rem] h-fit">
+    <Card className="h-fit">
       <CardContent>
-        <div className="flex flex-row justify-between items-center">
-          <div className="flex flex-col gap-2">
+        <div className="flex flex-row items-center grow">
+          <div className="flex flex-col gap-2 flex-grow">
             <p>{text}</p>
             <p className="text-xs text-muted-foreground capitalize">
               {splitCamelCase(iconName)}
