@@ -1,11 +1,15 @@
 import { _db } from "@/database/db";
 
 export function settingsProvider(serverCtx: ServerCtxType) {
-  async function getAccountTypes() {
+  async function getAccountTypes(search: string) {
     const result = await _db.accountType.findMany({
       where: {
         createdBy: {
           in: [1, serverCtx.id],
+        },
+        name: {
+          contains: search,
+          mode: "insensitive",
         },
       },
     });

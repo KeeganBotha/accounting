@@ -5,11 +5,13 @@ import { OptionSchema } from "@/components/optionsCrud/schema";
 import { z } from "zod";
 import { revalidatePath } from "next/cache";
 
-export const getAccountTypes = privateProcedure.action(async ({ ctx }) => {
-  const result = await ctx.svc.settingsService.getAccountTypes();
+export const getAccountTypes = privateProcedure
+  .schema(z.string())
+  .action(async ({ ctx, parsedInput: search }) => {
+    const result = await ctx.svc.settingsService.getAccountTypes(search);
 
-  return { result };
-});
+    return { result };
+  });
 
 export const mutateAccountType = privateProcedure
   .schema(OptionSchema)

@@ -5,8 +5,8 @@ import { settingsProvider } from "./settings-provider";
 export function settingsService(serverCtx: ServerCtxType) {
   const _provider = settingsProvider(serverCtx);
 
-  async function getAccountTypes() {
-    const rawResult = await _provider.getAccountTypes();
+  async function getAccountTypes(search: string) {
+    const rawResult = await _provider.getAccountTypes(search);
     const result = rawResult.map((accountType) =>
       asOption(accountType, "name", "iconName")
     );
