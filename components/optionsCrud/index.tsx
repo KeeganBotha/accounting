@@ -29,7 +29,7 @@ export function OptionsCrud({ onMutate, options, onDelete }: OptionsCrudProps) {
           return (
             <OptionCard
               key={option.value}
-              data={option}
+              option={option}
               onDelete={onDelete}
               onEdit={onMutate}
             />

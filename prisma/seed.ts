@@ -102,6 +102,18 @@ async function main() {
       },
     ],
   });
+
+  await prisma.$executeRawUnsafe(`
+  SELECT setval(pg_get_serial_sequence('"user"', 'id'), (SELECT COALESCE(MAX(id), 1) FROM "user"));
+`);
+
+  await prisma.$executeRawUnsafe(`
+  SELECT setval(pg_get_serial_sequence('"side_menu"', 'id'), (SELECT COALESCE(MAX(id), 1) FROM "side_menu"));
+`);
+
+  await prisma.$executeRawUnsafe(`
+  SELECT setval(pg_get_serial_sequence('"account_type"', 'id'), (SELECT COALESCE(MAX(id), 1) FROM "account_type"));
+`);
 }
 main()
   .then(async () => {

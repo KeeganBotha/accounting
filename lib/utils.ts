@@ -17,7 +17,7 @@ export function asOption<T extends { id: number }>(
   return {
     value: obj.id.toString(),
     text: (obj[text] as any).toString() as string,
-    iconName: (obj[iconName] as any).toString() as string,
+    iconName: ((obj[iconName] as any).toString() as string) ?? "",
   };
 }
 

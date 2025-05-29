@@ -9,13 +9,13 @@ import { MutateDialog } from "./MutateDialog";
 import { Card, CardContent } from "../ui/card";
 
 type OptionCardProps = {
-  data: OptionType;
+  option: OptionType;
   onEdit: (option: OptionType) => Promise<void>;
   onDelete: (id: number) => Promise<void>;
 };
 
-export function OptionCard({ data, onDelete, onEdit }: OptionCardProps) {
-  const { iconName, text, value } = data;
+export function OptionCard({ option, onDelete, onEdit }: OptionCardProps) {
+  const { iconName, text, value } = option;
 
   function handleDelete() {
     onDelete(+(value ?? 0));
@@ -32,7 +32,7 @@ export function OptionCard({ data, onDelete, onEdit }: OptionCardProps) {
             </p>
           </div>
           <div className="flex gap-4">
-            <MutateDialog onSubmit={onEdit} title="Edit Option">
+            <MutateDialog option={option} onSubmit={onEdit} title="Edit Option">
               <Button variant="outline" size="icon">
                 <Icon iconName="Edit" />
               </Button>
