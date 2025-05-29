@@ -16,7 +16,6 @@ import { ICON_OPTIONS } from "../icon";
 import { OptionSchema } from "./schema";
 import { RHFInput } from "../controlled-components/RHFInput";
 import { RHFSelect } from "../controlled-components/RHFSelect";
-import { RHFDiagnostic } from "../controlled-components/RHFDiagnostic";
 
 type MutateDialog = {
   title: string;
@@ -54,7 +53,6 @@ export function MutateDialog({
         <DialogDescription hidden />
         <FormProvider {...formMethods}>
           <form className="flex flex-col gap-4" onSubmit={handleSubmit}>
-            <RHFDiagnostic />
             <RHFInput label="Type" name="text" />
             <RHFSelect label="Icon" name="iconName" options={ICON_OPTIONS} />
             <div className="flex flex-row justify-between">
