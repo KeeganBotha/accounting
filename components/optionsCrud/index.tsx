@@ -1,7 +1,7 @@
 "use client";
 
 import { Icon } from "../icon";
-import { Input } from "../ui/input";
+import { Search } from "../search";
 import { Button } from "../ui/button";
 import { OptionCard } from "./OptionCard";
 import { MutateDialog } from "./MutateDialog";
@@ -17,7 +17,8 @@ export function OptionsCrud({ onMutate, options, onDelete }: OptionsCrudProps) {
     <div className="flex flex-col gap-4 grow w-full">
       <div className="flex flex-row justify-between">
         {/* Come back and replace this with the search */}
-        <Input placeholder="Search..." className="max-w-xs" />
+        <Search />
+
         <MutateDialog onSubmit={onMutate} title="Add Option">
           <Button>
             <Icon iconName="Add" /> Add

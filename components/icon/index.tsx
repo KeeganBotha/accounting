@@ -21,6 +21,7 @@ import {
   Pen,
   Plus,
   LoaderCircle,
+  Search,
 } from "lucide-react";
 import { cloneElement } from "react";
 
@@ -46,6 +47,7 @@ const icons = {
   Edit: <Pen />,
   Add: <Plus />,
   Loading: <LoaderCircle />,
+  Search: <Search />,
 };
 
 export type IconName = keyof typeof icons;
