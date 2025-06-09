@@ -62,3 +62,19 @@ model Account {
 
   @@map("accounts")
 }
+
+model Member {
+  id              Int           @id @default(autoincrement())
+  first_name      String
+  last_name       String
+  middle_name     String
+  identity_number Int
+  cell            String
+  email           String
+  expiration_date DateTime
+  has_paid        Boolean       @default(false)
+  created_on      DateTime      @default(now())
+  updated_on      DateTime      
+
+  @@map("member")
+}
