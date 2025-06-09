@@ -7,7 +7,7 @@ import { revalidatePath } from "next/cache";
 
 export const getMembers = privateProcedure.action(
   async ({ ctx, parsedInput: search }) => {
-    const result = await ctx.svc.settingsService.getMembers();
+    const result = await ctx.svc.settingsService.getMembers(search);
 
     return { result };
   }

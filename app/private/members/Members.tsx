@@ -1,11 +1,11 @@
 "use client";
 
-import { OptionsCrud } from "@/components/optionsCrud";
 import { handleSafeActionResult } from "@/lib/utils";
-import { deleteAccountType, mutateAccountType } from "./action";
+import { deleteAccountType, getMembers, mutateAccountType } from "./action";
+import { InferSafeActionFnInput } from "next-safe-action";
 
 type MembersProps = {
-  members: any[];
+  members: InferSafeActionFnInput<typeof getMembers>;
 };
 
 export function Members({ members }: MembersProps) {
@@ -17,11 +17,5 @@ export function Members({ members }: MembersProps) {
     handleSafeActionResult(await deleteAccountType(id));
   }
 
-  return (
-    <OptionsCrud
-      options={options}
-      onDelete={handleDelete}
-      onMutate={handleMutate}
-    />
-  );
+  return <>Members</>;
 }
