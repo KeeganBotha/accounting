@@ -41,6 +41,12 @@ async function main() {
         parentId: 2,
       },
       {
+        id: 7,
+        name: "Members",
+        path: "/private/members",
+        iconName: "Users",
+      },
+      {
         id: 5,
         name: "Settings",
         path: "/private/settings/account-options",
