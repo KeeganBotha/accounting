@@ -1,6 +1,5 @@
 "use client";
 
-import { zodResolver } from "@hookform/resolvers/zod";
 import { FormProvider, useForm } from "react-hook-form";
 
 import {
@@ -11,12 +10,11 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
-import { z } from "zod";
 
 type MutateDialog = {
   title: string;
   option?: OptionType;
-  onSubmit: () => Promise<void>;
+  onSubmit: (option: OptionType) => Promise<void>;
   children: React.ReactNode;
 };
 
@@ -32,14 +30,9 @@ export function MutateDialog({
   option = defaultValues,
   children,
 }: MutateDialog) {
-  const formMethods = useForm({
-    resolver: zodResolver(z.object({})),
-    defaultValues: { ...option },
-  });
+  const formMethods = useForm({});
 
-  const handleSubmit = formMethods.handleSubmit(async () => {
-    await onSubmit();
-  });
+  const handleSubmit = formMethods.handleSubmit(async (formData) => {});
 
   return (
     <Dialog>
@@ -48,9 +41,7 @@ export function MutateDialog({
         <DialogTitle>{title}</DialogTitle>
         <DialogDescription hidden />
         <FormProvider {...formMethods}>
-          <form className="flex flex-col gap-4" onSubmit={handleSubmit}>
-            Mutate Here
-          </form>
+          <form className="flex flex-col gap-4" onSubmit={handleSubmit}></form>
         </FormProvider>
       </DialogContent>
     </Dialog>

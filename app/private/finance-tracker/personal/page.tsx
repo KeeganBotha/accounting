@@ -1,3 +1,5 @@
+import { List } from "./List";
+
 export default function Page() {
-  return <div>Personal</div>;
+  return <List accounts={[]} />;
 }

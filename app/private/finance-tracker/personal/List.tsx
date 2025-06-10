@@ -13,7 +13,7 @@ export function List({ accounts }: ListProps) {
       <div className="flex flex-row justify-between">
         <Search />
 
-        <MutateDialog onSubmit={} title="Add Option">
+        <MutateDialog onSubmit={() => {}} title="Add Option">
           <Button>
             <Icon iconName="Add" /> Add
           </Button>
