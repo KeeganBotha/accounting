@@ -16,7 +16,6 @@ export function OptionsCrud({ onMutate, options, onDelete }: OptionsCrudProps) {
   return (
     <div className="flex flex-col gap-4 grow w-full">
       <div className="flex flex-row justify-between">
-        {/* Come back and replace this with the search */}
         <Search />
 
         <MutateDialog onSubmit={onMutate} title="Add Option">

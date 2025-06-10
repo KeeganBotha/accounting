@@ -40,12 +40,12 @@ async function main() {
         iconName: "",
         parentId: 2,
       },
-      {
-        id: 7,
-        name: "Members",
-        path: "/private/members",
-        iconName: "Users",
-      },
+      // {
+      //   id: 7,
+      //   name: "Members",
+      //   path: "/private/members",
+      //   iconName: "Users",
+      // },
       {
         id: 5,
         name: "Settings",

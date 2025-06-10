@@ -9,9 +9,15 @@ import React from "react";
 export function Search() {
   const { set, get } = useSearchParamsCrud();
   const initialValue = get("search");
-  const [search, setSearch] = React.useState(initialValue);
+  const [search, setSearch] = React.useState(initialValue ?? "");
 
-  const handleSearch = lodash.debounce((search: string) => {}, 1000);
+  const handleSearch = lodash.debounce(
+    (event: React.ChangeEvent<HTMLInputElement>) => {
+      setSearch(event.target.value);
+      set("search", event.target.value);
+    },
+    1000
+  );
 
   return (
     <div className="relative">
@@ -19,7 +25,12 @@ export function Search() {
         iconName="Search"
         className="absolute left-2 top-1/2 transform -translate-y-1/2 h-4 w-4"
       />
-      <Input placeholder="Search..." className="max-w-xs pl-8" value={search} />
+      <Input
+        onChange={handleSearch}
+        placeholder="Search..."
+        className="max-w-xs pl-8"
+        value={search}
+      />
     </div>
   );
 }
