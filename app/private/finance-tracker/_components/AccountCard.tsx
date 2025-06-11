@@ -16,12 +16,15 @@ export function AccountCard({
 }: AccountCardProps) {
   return (
     <Card className="h-fit hover:scale-[99%] duration-300 transition-all cursor-pointer">
-      <CardContent className="flex flex-col gap-2">
-        <div className="flex flex-row gap-2 items-center">
-          <Icon className="h-4 w-4" iconName={iconName} />
-          <p>{name}</p>
+      <CardContent className="flex flex-row justify-between">
+        <div className="flex flex-col gap-2">
+          <div className="flex flex-row gap-2 items-center">
+            <Icon className="h-4 w-4" iconName={iconName} />
+            <p>{name}</p>
+          </div>
+          <p className="text-xs text-muted-foreground">{accountName}</p>
         </div>
-        <p className="text-xs text-muted-foreground">{accountName}</p>
+        <Icon className="h-24 w-24 !opacity-10" iconName={iconName} />
       </CardContent>
     </Card>
   );
