@@ -5,6 +5,7 @@ import { FormProvider, useForm } from "react-hook-form";
 
 import {
   Dialog,
+  DialogClose,
   DialogContent,
   DialogDescription,
   DialogTitle,
@@ -16,12 +17,13 @@ import {
   AccountSchema,
   accountSchemaDefaults,
 } from "../_data/financeTrackerSchema";
-import { FormButtons } from "@/components/controlled-components/FormButtons";
+import { Button } from "@/components/ui/button";
+import { z } from "zod";
 
 type MutateDialog = {
   title: string;
   children: React.ReactNode;
-  onSubmit: () => Promise<void>;
+  onSubmit: (formData: z.infer<typeof AccountSchema>) => Promise<void>;
   accountTypeOptions: OptionType[];
 };
 
@@ -36,8 +38,8 @@ export function MutateDialog({
     defaultValues: accountSchemaDefaults,
   });
 
-  const handleSubmit = formMethods.handleSubmit(async () => {
-    await onSubmit();
+  const handleSubmit = formMethods.handleSubmit(async (formData) => {
+    await onSubmit(formData);
   });
 
   return (
@@ -54,7 +56,14 @@ export function MutateDialog({
               name="accountTypeId"
               options={accountTypeOptions}
             />
-            <FormButtons />
+            <div className="flex flex-row justify-between">
+              <DialogClose asChild>
+                <Button variant="secondary">Cancel</Button>
+              </DialogClose>
+              <DialogClose asChild>
+                <Button type="submit">Submit</Button>
+              </DialogClose>
+            </div>
           </form>
         </FormProvider>
       </DialogContent>

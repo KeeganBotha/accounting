@@ -17,5 +17,5 @@ export default async function Page({ searchParams }: PageProps) {
   const accounts = query?.data?.result ?? [];
   const accountTypeOptions = accountTypeOptionsQuery?.data?.result ?? [];
 
-  return <List accounts={accounts} />;
+  return <List accounts={accounts} accountTypeOptions={accountTypeOptions} />;
 }

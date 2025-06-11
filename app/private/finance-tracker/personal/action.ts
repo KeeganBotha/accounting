@@ -3,6 +3,7 @@
 import { privateProcedure } from "@/lib/safe-action";
 import { z } from "zod";
 import { AccountSchema } from "../_data/financeTrackerSchema";
+import { revalidatePath } from "next/cache";
 
 export const getPersonalAccounts = privateProcedure
   .schema(z.string())
@@ -27,6 +28,7 @@ export const mutateAccount = privateProcedure
   .action(async ({ ctx, parsedInput }) => {
     const result =
       await ctx.svc.financeTrackerService.mutateAccount(parsedInput);
+    revalidatePath("private/finance-tracker/personal", "layout");
 
     return { result };
   });
@@ -35,6 +37,7 @@ export const deleteAccount = privateProcedure
   .schema(z.coerce.number())
   .action(async ({ ctx, parsedInput: accountId }) => {
     const result = await ctx.svc.financeTrackerService.deleteAccount(accountId);
+    revalidatePath("private/finance-tracker/personal", "layout");
 
     return { result };
   });
