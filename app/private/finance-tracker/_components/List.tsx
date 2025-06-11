@@ -1,14 +1,17 @@
 "use client";
 
-import { Icon } from "@/components/icon";
+import { z } from "zod";
+import { InferSafeActionFnResult } from "next-safe-action";
+
 import { Search } from "@/components/search";
 import { Button } from "@/components/ui/button";
-import { MutateDialog } from "./MutateDialog";
-import { InferSafeActionFnResult } from "next-safe-action";
-import { getPersonalAccounts, mutateAccount } from "../personal/action";
+import { Icon, IconName } from "@/components/icon";
 import { handleSafeActionResult } from "@/lib/utils";
-import { z } from "zod";
+
+import { MutateDialog } from "./MutateDialog";
+import { AccountCard } from "./AccountCard";
 import { AccountSchema } from "../_data/financeTrackerSchema";
+import { getPersonalAccounts, mutateAccount } from "../personal/action";
 
 type ListProps = {
   accounts: NonNullable<
@@ -39,9 +42,22 @@ export function List({ accounts, accountTypeOptions }: ListProps) {
       </div>
 
       <div className="grid gap-4 w-full grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-        {accounts.map((account) => (
-          <div>{account.name}</div>
-        ))}
+        {accounts.map((account) => {
+          const { id, name, accountType } = account;
+          const { iconName: accountIconName, name: accountName } = accountType;
+
+          const iconName = (accountIconName ?? "Loading") as IconName;
+
+          return (
+            <AccountCard
+              key={id}
+              iconName={iconName}
+              id={id}
+              name={name}
+              accountName={accountName}
+            />
+          );
+        })}
       </div>
     </div>
   );

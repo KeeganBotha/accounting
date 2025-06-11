@@ -5,6 +5,9 @@ import { z } from "zod";
 export function financeTrackerProvider(serverCtx: ServerCtxType) {
   async function getPersonalAccounts(search: string) {
     const result = await _db.account.findMany({
+      include: {
+        accountType: true,
+      },
       where: {
         name: {
           contains: search,
