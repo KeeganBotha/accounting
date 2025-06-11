@@ -5,36 +5,35 @@ import { FormProvider, useForm } from "react-hook-form";
 
 import {
   Dialog,
-  DialogClose,
   DialogContent,
   DialogDescription,
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
-import { z } from "zod";
+import { RHFSelect } from "@/components/controlled-components/RHFSelect";
+import { RHFInput } from "@/components/controlled-components/RHFInput";
+import {
+  AccountSchema,
+  accountSchemaDefaults,
+} from "../_data/financeTrackerSchema";
+import { FormButtons } from "@/components/controlled-components/FormButtons";
 
 type MutateDialog = {
   title: string;
-  option?: OptionType;
-  onSubmit: () => Promise<void>;
   children: React.ReactNode;
-};
-
-const defaultValues = {
-  text: "",
-  value: "0",
-  iconName: "",
+  onSubmit: () => Promise<void>;
+  accountTypeOptions: OptionType[];
 };
 
 export function MutateDialog({
   onSubmit,
-  title,
-  option = defaultValues,
   children,
+  title,
+  accountTypeOptions,
 }: MutateDialog) {
   const formMethods = useForm({
-    resolver: zodResolver(z.object({})),
-    defaultValues: { ...option },
+    resolver: zodResolver(AccountSchema),
+    defaultValues: accountSchemaDefaults,
   });
 
   const handleSubmit = formMethods.handleSubmit(async () => {
@@ -49,7 +48,13 @@ export function MutateDialog({
         <DialogDescription hidden />
         <FormProvider {...formMethods}>
           <form className="flex flex-col gap-4" onSubmit={handleSubmit}>
-            Mutate Here
+            <RHFInput label="Account Name" name="accountName" />
+            <RHFSelect
+              label="Account Type"
+              name="accountTypeId"
+              options={accountTypeOptions}
+            />
+            <FormButtons />
           </form>
         </FormProvider>
       </DialogContent>

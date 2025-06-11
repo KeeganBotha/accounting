@@ -12,6 +12,7 @@ export function financeTrackerProvider(serverCtx: ServerCtxType) {
         },
         isActive: true,
         is_shared: false,
+        userId: serverCtx.id,
       },
     });
 
@@ -19,6 +20,7 @@ export function financeTrackerProvider(serverCtx: ServerCtxType) {
   }
 
   async function getFamilyAccounts(search: string) {
+    //We will need to come back and find a way to link people to the family accounts - Dont want people seeing things they are not meant to
     const result = await _db.account.findMany({
       where: {
         name: {

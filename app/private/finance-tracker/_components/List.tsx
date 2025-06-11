@@ -7,17 +7,22 @@ import { MutateDialog } from "./MutateDialog";
 
 type ListProps = {
   accounts: any[];
+  accountTypeOptions: OptionType[];
 };
 
-export function List({ accounts }: ListProps) {
-  async function Test() {}
+export function List({ accounts, accountTypeOptions }: ListProps) {
+  async function handleSubmit() {}
 
   return (
     <div className="flex flex-col gap-4 grow w-full">
       <div className="flex flex-row justify-between">
         <Search />
 
-        <MutateDialog onSubmit={Test} title="Add Option">
+        <MutateDialog
+          onSubmit={handleSubmit}
+          title="Add Account"
+          accountTypeOPtions={accountTypeOptions}
+        >
           <Button>
             <Icon iconName="Add" /> Add
           </Button>

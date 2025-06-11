@@ -10,19 +10,31 @@ type FormButtonsProps = {
   onReset?: () => void;
 };
 
-export function FormButtons({ onSubmit, onReset }: FormButtonsProps) {
+export function FormButtons({
+  onSubmit = () => {},
+  onReset = () => {},
+}: FormButtonsProps) {
   const formMethods = useFormContext();
   const isSubmitting = formMethods.formState.isSubmitting;
 
+  function handleReset() {
+    onReset();
+    formMethods.reset();
+  }
+
+  function handleSubmit() {
+    onSubmit();
+  }
+
   return (
     <div className="flex flex-row gap-4 items-center justify-center">
-      <Button type="reset" variant="secondary">
+      <Button type="reset" variant="secondary" onClick={handleReset}>
         {isSubmitting ? (
           <Icon iconName="Loading" className="animate-spin" />
         ) : null}
         Reset
       </Button>
-      <Button type="submit">
+      <Button type="submit" onClick={handleSubmit}>
         {isSubmitting ? (
           <Icon iconName="Loading" className="animate-spin" />
         ) : null}

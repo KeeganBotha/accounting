@@ -1,4 +1,4 @@
-"use client";
+"use server";
 
 import { privateProcedure } from "@/lib/safe-action";
 import { z } from "zod";
@@ -32,7 +32,7 @@ export const mutateAccount = privateProcedure
   });
 
 export const deleteAccount = privateProcedure
-  .schema(z.string())
+  .schema(z.coerce.number())
   .action(async ({ ctx, parsedInput: accountId }) => {
     const result = await ctx.svc.financeTrackerService.deleteAccount(accountId);
 
