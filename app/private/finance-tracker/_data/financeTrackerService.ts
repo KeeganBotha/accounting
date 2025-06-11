@@ -1,4 +1,6 @@
+import { z } from "zod";
 import { financeTrackerProvider } from "./financeTrackerProvider";
+import { AccountSchema } from "./financeTrackerSchema";
 
 export function financeTrackerService(serverCtx: ServerCtxType) {
   const _provider = financeTrackerProvider(serverCtx);
@@ -15,8 +17,8 @@ export function financeTrackerService(serverCtx: ServerCtxType) {
     return result;
   }
 
-  async function mutateAccount() {
-    const result = await _provider.mutateAccount();
+  async function mutateAccount(input: z.infer<typeof AccountSchema>) {
+    const result = await _provider.mutateAccount(input);
 
     return result;
   }
@@ -27,5 +29,10 @@ export function financeTrackerService(serverCtx: ServerCtxType) {
     return result;
   }
 
-  return { getPersonalAccounts };
+  return {
+    getPersonalAccounts,
+    getFamilyAccounts,
+    mutateAccount,
+    deleteAccount,
+  };
 }
