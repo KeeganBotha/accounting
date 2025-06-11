@@ -59,6 +59,7 @@ model Account {
   is_shared       Boolean       @default(false)
   createdAt       DateTime      @default(now())
   updatedAt       DateTime      @updatedAt
+  isActive        Boolean       
 
   @@map("accounts")
 }

@@ -1,3 +1,5 @@
+"use client";
+
 import { Icon } from "@/components/icon";
 import { Search } from "@/components/search";
 import { Button } from "@/components/ui/button";
@@ -8,12 +10,14 @@ type ListProps = {
 };
 
 export function List({ accounts }: ListProps) {
+  async function Test() {}
+
   return (
     <div className="flex flex-col gap-4 grow w-full">
       <div className="flex flex-row justify-between">
         <Search />
 
-        <MutateDialog onSubmit={() => {}} title="Add Option">
+        <MutateDialog onSubmit={Test} title="Add Option">
           <Button>
             <Icon iconName="Add" /> Add
           </Button>

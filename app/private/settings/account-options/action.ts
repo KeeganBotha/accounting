@@ -9,7 +9,6 @@ export const getAccountTypes = privateProcedure
   .schema(z.string())
   .action(async ({ ctx, parsedInput: search }) => {
     const result = await ctx.svc.settingsService.getAccountTypes(search);
-    console.log("Im here");
 
     return { result };
   });
