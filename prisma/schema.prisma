@@ -1,9 +1,3 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
-// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
-// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
-
 generator client {
   provider = "prisma-client-js"
 }
@@ -14,58 +8,86 @@ datasource db {
 }
 
 model User {
-  id          Int       @id @default(autoincrement())
-  email       String    @unique
-  lastLogin   DateTime
+  id            Int              @id @default(autoincrement())
+  email         String           @unique
+  lastLogin     DateTime
 
-  accounts    Account[]
-  accountTypes    AccountType[]
-
+  accounts      Account[]
+  accountTypes  AccountType[]
+  recordTypes   AccountRecordType[]
 
   @@map("user")
 }
 
 model SideMenu {
-  id          Int         @id @default(autoincrement())
-  name        String
-  iconName    String
-  path        String
-  parentId    Int?     
-  parent      SideMenu?   @relation("SideMenuToSelf", fields: [parentId], references: [id])
-  children    SideMenu[]  @relation("SideMenuToSelf")
+  id        Int         @id @default(autoincrement())
+  name      String
+  iconName  String
+  path      String
+  parentId  Int?
+  parent    SideMenu?   @relation("SideMenuToSelf", fields: [parentId], references: [id])
+  children  SideMenu[]  @relation("SideMenuToSelf")
 
   @@map("side_menu")
 }
 
 model AccountType {
-  id        Int       @id @default(autoincrement())
-  name      String
-  iconName  String?
-  createdBy Int 
-  creator   User      @relation(fields: [createdBy], references: [id])
+  id         Int       @id @default(autoincrement())
+  name       String
+  iconName   String?
+  createdBy  Int
+  creator    User      @relation(fields: [createdBy], references: [id])
 
-  accounts  Account[]
+  accounts   Account[]
 
   @@map("account_type")
 }
 
 model Account {
-  id              Int           @id @default(autoincrement())
-  userId          Int
-  user            User          @relation(fields: [userId], references: [id])
-  accountTypeId   Int
-  accountType     AccountType   @relation(fields: [accountTypeId], references: [id])
-  name            String
-  is_shared       Boolean       @default(false)
-  createdAt       DateTime      @default(now())
-  updatedAt       DateTime      @updatedAt
-  isActive        Boolean       
+  id             Int           @id @default(autoincrement())
+  userId         Int
+  user           User          @relation(fields: [userId], references: [id])
+  accountTypeId  Int
+  accountType    AccountType   @relation(fields: [accountTypeId], references: [id])
+  name           String
+  is_shared      Boolean       @default(false)
+  createdAt      DateTime      @default(now())
+  updatedAt      DateTime      @updatedAt
+  isActive       Boolean
+
+  records        AccountRecord[]
 
   @@map("accounts")
 }
 
+model AccountRecordType {
+  id             Int             @id @default(autoincrement())
+  name           String
+  iconName       String?
+  createdBy      Int
+  creator        User            @relation(fields: [createdBy], references: [id])
+
+  records        AccountRecord[]
+
+  @@map("account_record_type")
+}
+
+model AccountRecord {
+  id                   Int                @id @default(autoincrement())
+  accountId            Int
+  accountRecordTypeId  Int
+  value                Double
+  createdAt            DateTime           @default(now())
+  updatedAt            DateTime           @updatedAt
+
+  account              Account            @relation(fields: [accountId], references: [id])
+  recordType           AccountRecordType  @relation(fields: [accountRecordTypeId], references: [id])
+
+  @@map("account_record")
+}
+
 model Member {
-  id              Int           @id @default(autoincrement())
+  id              Int       @id @default(autoincrement())
   first_name      String
   last_name       String
   middle_name     String
@@ -73,9 +95,9 @@ model Member {
   cell            String
   email           String
   expiration_date DateTime
-  has_paid        Boolean       @default(false)
-  created_on      DateTime      @default(now())
-  updated_on      DateTime      
+  has_paid        Boolean   @default(false)
+  created_on      DateTime  @default(now())
+  updated_on      DateTime
 
   @@map("member")
 }
