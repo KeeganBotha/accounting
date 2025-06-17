@@ -41,3 +41,11 @@ export const deleteAccount = privateProcedure
 
     return { result };
   });
+
+export const getAccount = privateProcedure
+  .schema(z.coerce.number())
+  .action(async ({ ctx, parsedInput: accountId }) => {
+    const result = await ctx.svc.financeTrackerService.getAccount(accountId);
+
+    return { result };
+  });

@@ -76,10 +76,28 @@ export function financeTrackerProvider(serverCtx: ServerCtxType) {
     return result;
   }
 
+  async function getAccount(accountId: number) {
+    const result = await _db.account.findFirst({
+      include: {
+        accountRecords: {
+          include: {
+            recordType: true,
+          },
+        },
+      },
+      where: {
+        id: accountId,
+      },
+    });
+
+    return result;
+  }
+
   return {
     getPersonalAccounts,
     getFamilyAccounts,
     deleteAccount,
     mutateAccount,
+    getAccount,
   };
 }

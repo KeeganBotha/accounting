@@ -29,10 +29,25 @@ export function financeTrackerService(serverCtx: ServerCtxType) {
     return result;
   }
 
+  async function getAccount(accountId: number) {
+    const rawResult = await _provider.getAccount(accountId);
+    const result = rawResult?.accountRecords.map((record) => {
+      return {
+        id: +record.id,
+        amount: +record.value,
+        recordType: record.recordType.name,
+        createdAt: record.createdAt,
+      };
+    });
+
+    return result;
+  }
+
   return {
     getPersonalAccounts,
     getFamilyAccounts,
     mutateAccount,
     deleteAccount,
+    getAccount,
   };
 }
