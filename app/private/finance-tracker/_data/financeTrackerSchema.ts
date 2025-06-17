@@ -13,3 +13,8 @@ export const accountSchemaDefaults: z.infer<typeof AccountSchema> = {
   accountTypeId: "0",
   isShared: false,
 };
+
+export const AccountRecordSchema = z.object({
+  name: z.string(),
+  value: z.coerce.number(),
+});

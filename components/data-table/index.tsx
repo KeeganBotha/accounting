@@ -23,11 +23,15 @@ import { MutateDialog } from "./MutateDialog";
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
   data: TData[];
+  form: React.ReactNode;
+  onMutate: () => Promise<void>;
 }
 
 export function DataTable<TData, TValue>({
   columns,
   data,
+  form,
+  onMutate,
 }: DataTableProps<TData, TValue>) {
   const table = useReactTable({
     data,
@@ -35,18 +39,12 @@ export function DataTable<TData, TValue>({
     getCoreRowModel: getCoreRowModel(),
   });
 
-  async function handleMutate() {}
-
   return (
     <div className="flex flex-col gap-4 grow w-full">
       <div className="flex flex-row justify-between">
         <Search />
 
-        <MutateDialog
-          form={<>Test</>}
-          onSubmit={handleMutate}
-          title="Add Record"
-        >
+        <MutateDialog form={form} onSubmit={onMutate} title="Add Record">
           <Button>
             <Icon iconName="Add" /> Add
           </Button>
