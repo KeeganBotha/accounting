@@ -6,7 +6,8 @@ import { AccountRecordSchema } from "../_data/financeTrackerSchema";
 export const mutateAccountRecord = privateProcedure
   .schema(AccountRecordSchema)
   .action(async ({ ctx, parsedInput }) => {
-    const result = ctx.svc.financeTrackerService.mutateAccountRecord();
+    const result =
+      await ctx.svc.financeTrackerService.mutateAccountRecord(parsedInput);
 
     return {
       message: "Account record updated successfully.",
