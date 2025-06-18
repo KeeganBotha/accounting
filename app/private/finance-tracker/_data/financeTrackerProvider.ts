@@ -96,16 +96,23 @@ export function financeTrackerProvider(serverCtx: ServerCtxType) {
   async function mutateAccountRecord(
     input: z.infer<typeof AccountRecordSchema>
   ) {
+    const currentDate = new Date();
+
     const result = await _db.accountRecord.upsert({
       create: {
         value: input.value,
         accountId: input.accountId,
         accountRecordTypeId: 1,
+        createdBy: serverCtx.id,
+        createdAt: currentDate,
+        updatedBy: serverCtx.id,
       },
       update: {
         value: input.value,
         accountId: input.accountId,
         accountRecordTypeId: 1,
+        updatedBy: serverCtx.id,
+        updatedAt: currentDate,
       },
       where: {
         accountId: input.accountId,
