@@ -15,6 +15,8 @@ export const accountSchemaDefaults: z.infer<typeof AccountSchema> = {
 };
 
 export const AccountRecordSchema = z.object({
+  accountRecordId: z.coerce.number(),
+  accountId: z.coerce.number(),
   name: z.string(),
   value: z.coerce.number(),
 });

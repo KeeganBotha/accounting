@@ -1,5 +1,5 @@
 import { _db } from "@/database/db";
-import { AccountSchema } from "./financeTrackerSchema";
+import { AccountRecordSchema, AccountSchema } from "./financeTrackerSchema";
 import { z } from "zod";
 
 export function financeTrackerProvider(serverCtx: ServerCtxType) {
@@ -93,11 +93,37 @@ export function financeTrackerProvider(serverCtx: ServerCtxType) {
     return result;
   }
 
+  async function mutateAccountRecord(
+    input: z.infer<typeof AccountRecordSchema>
+  ) {
+    const result = await _db.accountRecord.upsert({
+      create: {
+        value: input.value,
+        accountId: input.accountId,
+        accountRecordTypeId: 1,
+      },
+      update: {
+        value: input.value,
+        accountId: input.accountId,
+        accountRecordTypeId: 1,
+      },
+      where: {
+        accountId: input.accountId,
+        id: input.accountRecordId,
+      },
+    });
+
+    if (result) return true;
+
+    return false;
+  }
+
   return {
-    getPersonalAccounts,
-    getFamilyAccounts,
-    deleteAccount,
-    mutateAccount,
     getAccount,
+    getFamilyAccounts,
+    getPersonalAccounts,
+    mutateAccount,
+    mutateAccountRecord,
+    deleteAccount,
   };
 }

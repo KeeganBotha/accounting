@@ -15,6 +15,8 @@ model User {
   accounts      Account[]
   accountTypes  AccountType[]
   recordTypes   AccountRecordType[]
+  creatorAccountRecords AccountRecord[] @relation("CreatedBy")
+  updatorAccountRecords AccountRecord[] @relation("UpdatedBy")
 
   @@map("user")
 }
@@ -77,9 +79,13 @@ model AccountRecord {
   accountId            Int
   accountRecordTypeId  Int
   value                Decimal
+  createdBy            Int
   createdAt            DateTime           @default(now())
+  updatedBy            Int
   updatedAt            DateTime           @updatedAt
 
+  creator              User               @relation("CreatedBy", fields: [createdBy], references: [id])
+  updator              User               @relation("UpdatedBy", fields: [updatedBy], references: [id])
   account              Account            @relation(fields: [accountId], references: [id])
   recordType           AccountRecordType  @relation(fields: [accountRecordTypeId], references: [id])
 

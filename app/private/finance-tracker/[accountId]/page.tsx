@@ -1,7 +1,6 @@
-import { DataTable } from "@/components/data-table";
-
 import { columns } from "./columns";
 import { getAccount } from "../personal/action";
+import { DataTable } from ".";
 
 type PageProps = {
   params: Promise<{ accountId: number }>;

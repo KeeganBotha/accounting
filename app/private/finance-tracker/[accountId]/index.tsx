@@ -15,23 +15,19 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { Search } from "../search";
-import { Button } from "../ui/button";
-import { Icon } from "../icon";
 import { MutateDialog } from "./MutateDialog";
+import { Search } from "@/components/search";
+import { Button } from "@/components/ui/button";
+import { Icon } from "@/components/icon";
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
   data: TData[];
-  form: React.ReactNode;
-  onMutate: () => Promise<void>;
 }
 
 export function DataTable<TData, TValue>({
   columns,
   data,
-  form,
-  onMutate,
 }: DataTableProps<TData, TValue>) {
   const table = useReactTable({
     data,
@@ -44,7 +40,7 @@ export function DataTable<TData, TValue>({
       <div className="flex flex-row justify-between">
         <Search />
 
-        <MutateDialog form={form} onSubmit={onMutate} title="Add Record">
+        <MutateDialog>
           <Button>
             <Icon iconName="Add" /> Add
           </Button>
