@@ -19,6 +19,7 @@ import { MutateDialog } from "./MutateDialog";
 import { Search } from "@/components/search";
 import { Button } from "@/components/ui/button";
 import { Icon } from "@/components/icon";
+import React from "react";
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
@@ -29,22 +30,25 @@ export function DataTable<TData, TValue>({
   columns,
   data,
 }: DataTableProps<TData, TValue>) {
+  const [openAdd, setOpenAdd] = React.useState(false);
   const table = useReactTable({
     data,
     columns,
     getCoreRowModel: getCoreRowModel(),
   });
 
+  function handleOpenAdd() {
+    setOpenAdd(true);
+  }
+
   return (
     <div className="flex flex-col gap-4 grow w-full">
       <div className="flex flex-row justify-between">
         <Search />
 
-        <MutateDialog>
-          <Button>
-            <Icon iconName="Add" /> Add
-          </Button>
-        </MutateDialog>
+        <Button onClick={handleOpenAdd}>
+          <Icon iconName="Add" /> Add
+        </Button>
       </div>
 
       <div className="rounded-md border w-full">
@@ -97,6 +101,7 @@ export function DataTable<TData, TValue>({
           </TableBody>
         </Table>
       </div>
+      <MutateDialog open={openAdd} setOpen={setOpenAdd} />
     </div>
   );
 }
