@@ -8,7 +8,7 @@ type AccountOptionsProps = {
   options: OptionType[];
 };
 
-export function AccountOptions({ options }: AccountOptionsProps) {
+export function AccountRecordTypeOptions({ options }: AccountOptionsProps) {
   async function handleMutate(option: OptionType) {
     handleSafeActionResult(await mutateAccountType(option));
   }

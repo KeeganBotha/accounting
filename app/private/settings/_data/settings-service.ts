@@ -1,7 +1,6 @@
 import { asOption } from "@/lib/utils";
 
 import { settingsProvider } from "./settings-provider";
-import { raw } from "@prisma/client/runtime/library";
 
 export function settingsService(serverCtx: ServerCtxType) {
   const _provider = settingsProvider(serverCtx);
@@ -15,8 +14,24 @@ export function settingsService(serverCtx: ServerCtxType) {
     return result;
   }
 
+  async function getAccountRecordTypeOptions(search: string) {
+    const rawResult = await _provider.getAccountRecordTypes(search);
+
+    const result = rawResult.map((accountRecordType) =>
+      asOption(accountRecordType, "name", "iconName")
+    );
+
+    return result;
+  }
+
   async function mutateAccountType(input: OptionType) {
     const result = await _provider.mutateAccountType(input);
+
+    return result;
+  }
+
+  async function mutateAccountRecordType(input: OptionType) {
+    const result = await _provider.mutateAccountRecordType(input);
 
     return result;
   }
@@ -27,9 +42,18 @@ export function settingsService(serverCtx: ServerCtxType) {
     return result;
   }
 
+  async function deleteAccountRecordType(id: number) {
+    const result = await _provider.deleteAccountRecordType(id);
+
+    return result;
+  }
+
   return {
+    getAccountRecordTypeOptions,
     getAccountTypes,
+    mutateAccountRecordType,
     mutateAccountType,
+    deleteAccountRecordType,
     deleteAccountType,
   };
 }
