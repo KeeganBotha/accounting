@@ -54,8 +54,15 @@ async function main() {
       },
       {
         id: 6,
-        name: "Account Options",
+        name: "Account Type Options",
         path: "/private/settings/account-options",
+        iconName: "",
+        parentId: 5,
+      },
+      {
+        id: 8,
+        name: "Account Record Type Options",
+        path: "/private/settings/account-record-type-options",
         iconName: "",
         parentId: 5,
       },

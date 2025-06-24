@@ -2,7 +2,7 @@
 
 import { OptionsCrud } from "@/components/optionsCrud";
 import { handleSafeActionResult } from "@/lib/utils";
-import { deleteAccountType, mutateAccountType } from "./action";
+import { deleteAccountRecordType, mutateAccountRecordType } from "./action";
 
 type AccountOptionsProps = {
   options: OptionType[];
@@ -10,11 +10,11 @@ type AccountOptionsProps = {
 
 export function AccountRecordTypeOptions({ options }: AccountOptionsProps) {
   async function handleMutate(option: OptionType) {
-    handleSafeActionResult(await mutateAccountType(option));
+    handleSafeActionResult(await mutateAccountRecordType(option));
   }
 
   async function handleDelete(id: number) {
-    handleSafeActionResult(await deleteAccountType(id));
+    handleSafeActionResult(await deleteAccountRecordType(id));
   }
 
   return (
