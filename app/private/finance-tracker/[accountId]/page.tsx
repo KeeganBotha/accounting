@@ -11,5 +11,5 @@ export default async function Page({ params }: PageProps) {
   const query = await getAccount(accountId);
   const data = query?.data?.result ?? [];
 
-  return <DataTable columns={columns} data={data} />;
+  return <DataTable columns={columns} data={data} accountId={accountId} />;
 }

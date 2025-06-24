@@ -22,6 +22,7 @@ import { Icon } from "@/components/icon";
 import React from "react";
 
 interface DataTableProps<TData, TValue> {
+  accountId: number;
   columns: ColumnDef<TData, TValue>[];
   data: TData[];
 }
@@ -29,6 +30,7 @@ interface DataTableProps<TData, TValue> {
 export function DataTable<TData, TValue>({
   columns,
   data,
+  accountId,
 }: DataTableProps<TData, TValue>) {
   const [openAdd, setOpenAdd] = React.useState(false);
   const table = useReactTable({
@@ -101,7 +103,7 @@ export function DataTable<TData, TValue>({
           </TableBody>
         </Table>
       </div>
-      <MutateDialog open={openAdd} setOpen={setOpenAdd} />
+      <MutateDialog open={openAdd} setOpen={setOpenAdd} accountId={accountId} />
     </div>
   );
 }
