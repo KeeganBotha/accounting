@@ -23,6 +23,8 @@ import {
   LoaderCircle,
   Search,
   Users,
+  Download,
+  Upload,
 } from "lucide-react";
 import { cloneElement } from "react";
 
@@ -50,6 +52,8 @@ const icons = {
   Loading: <LoaderCircle />,
   Search: <Search />,
   Users: <Users />,
+  Download: <Download />,
+  Upload: <Upload />,
 };
 
 export type IconName = keyof typeof icons;

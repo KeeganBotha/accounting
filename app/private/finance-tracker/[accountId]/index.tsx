@@ -35,6 +35,8 @@ export function DataTable<TData, TValue>({
   options,
 }: DataTableProps<TData, TValue>) {
   const [openAdd, setOpenAdd] = React.useState(false);
+  const [openCSV, setOpenCSV] = React.useState(false);
+
   const table = useReactTable({
     data,
     columns,
@@ -45,14 +47,23 @@ export function DataTable<TData, TValue>({
     setOpenAdd(true);
   }
 
+  function handleOpenCSV() {
+    setOpenCSV(true);
+  }
+
   return (
     <div className="flex flex-col gap-4 grow w-full">
       <div className="flex flex-row justify-between">
         <Search />
 
-        <Button onClick={handleOpenAdd}>
-          <Icon iconName="Add" /> Add
-        </Button>
+        <div className="flex flex-row gap-4">
+          <Button onClick={handleOpenAdd}>
+            <Icon iconName="Add" /> Add
+          </Button>
+          <Button onClick={handleOpenCSV}>
+            <Icon iconName="Upload" /> CSV
+          </Button>
+        </div>
       </div>
 
       <div className="rounded-md border w-full">
