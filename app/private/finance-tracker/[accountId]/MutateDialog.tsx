@@ -1,6 +1,5 @@
 "use client";
 
-import { DialogClose } from "@radix-ui/react-dialog";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { FormProvider, useForm } from "react-hook-form";
 
@@ -9,21 +8,21 @@ import {
   DialogContent,
   DialogDescription,
   DialogTitle,
-  DialogTrigger,
 } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { handleSafeActionResult } from "@/lib/utils";
 import { RHFInput } from "@/components/controlled-components/RHFInput";
+import { RHFSelect } from "@/components/controlled-components/RHFSelect";
 import { AccountRecordSchema } from "@/app/private/finance-tracker/_data/financeTrackerSchema";
 
 import { mutateAccountRecord } from "./action";
-import { RHFDiagnostic } from "@/components/controlled-components/RHFDiagnostic";
 
 type MutateDialog = {
   accountId?: number;
   accountRecordId?: number;
   open: boolean;
   setOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  options: OptionType[];
 };
 
 export function MutateDialog({
@@ -31,6 +30,7 @@ export function MutateDialog({
   accountRecordId = 0,
   open,
   setOpen,
+  options,
 }: MutateDialog) {
   const formMethods = useForm({
     resolver: zodResolver(AccountRecordSchema),
@@ -67,10 +67,14 @@ export function MutateDialog({
         <DialogTitle>Add/Edit Record</DialogTitle>
         <DialogDescription hidden />
         <FormProvider {...formMethods}>
-          <RHFDiagnostic />
           <form onSubmit={handleSubmit} className="flex flex-col gap-4">
             <RHFInput label="Name" name="name" />
             <RHFInput label="Value" name="value" />
+            <RHFSelect
+              label="Record Type"
+              name="accountRecordTypeId"
+              options={options}
+            />
             <div className="flex flex-row justify-between">
               <Button onClick={handleClose} variant="secondary">
                 Cancel

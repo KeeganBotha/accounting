@@ -102,7 +102,7 @@ export function financeTrackerProvider(serverCtx: ServerCtxType) {
       create: {
         value: input.value,
         accountId: input.accountId,
-        accountRecordTypeId: 1,
+        accountRecordTypeId: +input.accountRecordTypeId,
         createdBy: serverCtx.id,
         createdAt: currentDate,
         updatedBy: serverCtx.id,

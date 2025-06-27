@@ -25,12 +25,14 @@ interface DataTableProps<TData, TValue> {
   accountId: number;
   columns: ColumnDef<TData, TValue>[];
   data: TData[];
+  options: OptionType[];
 }
 
 export function DataTable<TData, TValue>({
   columns,
   data,
   accountId,
+  options,
 }: DataTableProps<TData, TValue>) {
   const [openAdd, setOpenAdd] = React.useState(false);
   const table = useReactTable({
@@ -103,7 +105,12 @@ export function DataTable<TData, TValue>({
           </TableBody>
         </Table>
       </div>
-      <MutateDialog open={openAdd} setOpen={setOpenAdd} accountId={accountId} />
+      <MutateDialog
+        open={openAdd}
+        setOpen={setOpenAdd}
+        accountId={accountId}
+        options={options}
+      />
     </div>
   );
 }

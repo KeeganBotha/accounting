@@ -19,4 +19,5 @@ export const AccountRecordSchema = z.object({
   accountId: z.coerce.number(),
   name: z.string(),
   value: z.coerce.number(),
+  accountRecordTypeId: z.string(),
 });
