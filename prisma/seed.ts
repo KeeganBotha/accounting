@@ -34,13 +34,6 @@ async function main() {
         parentId: 2,
       },
       {
-        id: 4,
-        name: "Family",
-        path: "/private/finance-tracker/family",
-        iconName: "",
-        parentId: 2,
-      },
-      {
         id: 5,
         name: "Settings",
         path: "/private/settings/account-options",
