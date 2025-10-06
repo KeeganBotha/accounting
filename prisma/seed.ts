@@ -40,12 +40,6 @@ async function main() {
         iconName: "",
         parentId: 2,
       },
-      // {
-      //   id: 7,
-      //   name: "Members",
-      //   path: "/private/members",
-      //   iconName: "Users",
-      // },
       {
         id: 5,
         name: "Settings",
@@ -54,15 +48,8 @@ async function main() {
       },
       {
         id: 6,
-        name: "Account Type Options",
-        path: "/private/settings/account-options",
-        iconName: "",
-        parentId: 5,
-      },
-      {
-        id: 8,
-        name: "Account Record Type Options",
-        path: "/private/settings/account-record-type-options",
+        name: "Account Types",
+        path: "/private/settings/account-type",
         iconName: "",
         parentId: 5,
       },

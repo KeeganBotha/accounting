@@ -1,4 +1,4 @@
-import { AccountTypeOptions } from "./AccountTypeOptions";
+import { AccountType } from "./AccountType";
 import { getAccountTypes } from "./action";
 
 type PageProps = {
@@ -10,5 +10,5 @@ export default async function Page({ searchParams }: PageProps) {
   const query = await getAccountTypes(search ?? "");
   const options = query?.data?.result ?? [];
 
-  return <AccountTypeOptions options={options} />;
+  return <AccountType options={options} />;
 }

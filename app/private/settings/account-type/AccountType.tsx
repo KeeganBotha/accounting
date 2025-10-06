@@ -5,11 +5,11 @@ import { OptionsCrud } from "@/components/optionsCrud";
 
 import { deleteAccountType, mutateAccountType } from "./action";
 
-type AccountOptionsProps = {
+type AccountTypeProps = {
   options: OptionType[];
 };
 
-export function AccountTypeOptions({ options }: AccountOptionsProps) {
+export function AccountType({ options }: AccountTypeProps) {
   async function handleMutate(option: OptionType) {
     handleSafeActionResult(await mutateAccountType(option));
   }

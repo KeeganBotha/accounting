@@ -1,4 +1,4 @@
-import { getAccountTypes } from "../../settings/account-type-options/action";
+import { getAccountTypes } from "../../settings/account-type/action";
 import { List } from "../_components/List";
 import { getPersonalAccounts } from "./action";
 
