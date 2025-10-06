@@ -21,3 +21,8 @@ export const AccountRecordSchema = z.object({
   value: z.coerce.number(),
   accountRecordTypeId: z.string(),
 });
+
+export const AccountCsvSchema = z.object({
+  accountId: z.coerce.number(),
+  file: z.any(),
+});

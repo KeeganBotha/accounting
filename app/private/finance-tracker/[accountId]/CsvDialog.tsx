@@ -10,35 +10,20 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
-import { handleSafeActionResult } from "@/lib/utils";
-import { RHFInput } from "@/components/controlled-components/RHFInput";
-import { RHFSelect } from "@/components/controlled-components/RHFSelect";
-import { AccountRecordSchema } from "@/app/private/finance-tracker/_data/financeTrackerSchema";
+import { AccountCsvSchema } from "@/app/private/finance-tracker/_data/financeTrackerSchema";
 
-import { mutateAccountRecord } from "./action";
-
-type MutateDialogProps = {
+type CsvDialogProps = {
   accountId?: number;
-  accountRecordId?: number;
   open: boolean;
   setOpen: React.Dispatch<React.SetStateAction<boolean>>;
-  options: OptionType[];
 };
 
-export function MutateDialog({
-  accountId = 0,
-  accountRecordId = 0,
-  open,
-  setOpen,
-  options,
-}: MutateDialogProps) {
+export function CsvDialog({ accountId = 0, open, setOpen }: CsvDialogProps) {
   const formMethods = useForm({
-    resolver: zodResolver(AccountRecordSchema),
+    resolver: zodResolver(AccountCsvSchema),
     defaultValues: {
-      name: "",
-      value: 0,
       accountId: accountId ?? 0,
-      accountRecordId: accountRecordId,
+      file: {},
     },
   });
 
@@ -51,30 +36,16 @@ export function MutateDialog({
     formMethods.reset();
   }
 
-  const handleSubmit = formMethods.handleSubmit(async (formData) => {
-    const result = handleSafeActionResult(
-      await mutateAccountRecord({
-        ...formData,
-      })
-    );
-
-    if (result && result?.result) handleClose();
-  });
+  const handleSubmit = formMethods.handleSubmit(async (formData) => {});
 
   return (
     <Dialog open={open} onOpenChange={handleOpenChange}>
       <DialogContent>
-        <DialogTitle>Add/Edit Record</DialogTitle>
+        <DialogTitle>Upload CSV</DialogTitle>
         <DialogDescription hidden />
         <FormProvider {...formMethods}>
           <form onSubmit={handleSubmit} className="flex flex-col gap-4">
-            <RHFInput label="Name" name="name" />
-            <RHFInput label="Value" name="value" />
-            <RHFSelect
-              label="Record Type"
-              name="accountRecordTypeId"
-              options={options}
-            />
+            <>CSV Uploader goes here...</>
             <div className="flex flex-row justify-between">
               <Button onClick={handleClose} variant="secondary">
                 Cancel

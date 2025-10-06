@@ -20,6 +20,7 @@ import { Search } from "@/components/search";
 import { Button } from "@/components/ui/button";
 import { Icon } from "@/components/icon";
 import React from "react";
+import { CsvDialog } from "./CsvDialog";
 
 interface DataTableProps<TData, TValue> {
   accountId: number;
@@ -122,6 +123,7 @@ export function DataTable<TData, TValue>({
         accountId={accountId}
         options={options}
       />
+      <CsvDialog open={openCSV} setOpen={setOpenCSV} accountId={accountId} />
     </div>
   );
 }
