@@ -11,10 +11,10 @@ import {
 } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { AccountCsvSchema } from "@/app/private/finance-tracker/_data/financeTrackerSchema";
-import { RHFInput } from "@/components/controlled-components/RHFInput";
 import { RHFDiagnostic } from "@/components/controlled-components/RHFDiagnostic";
 import { handleSafeActionResult } from "@/lib/utils";
 import { mutateAccountRecordCsv } from "./action";
+import { RHFFile } from "@/components/controlled-components/RHFFile";
 
 type CsvDialogProps = {
   accountId?: number;
@@ -53,7 +53,7 @@ export function CsvDialog({ accountId = 0, open, setOpen }: CsvDialogProps) {
         <FormProvider {...formMethods}>
           <form onSubmit={handleSubmit} className="flex flex-col gap-4">
             <RHFDiagnostic />
-            <RHFInput type="file" label="Upload File" name="file" />
+            <RHFFile label="Upload File" name="file" />
             <div className="flex flex-row justify-between">
               <Button onClick={handleClose} variant="secondary">
                 Cancel

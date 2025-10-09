@@ -12,21 +12,22 @@ interface RHFFileProps {
 export function RHFFile({ name, label, ...props }: RHFFileProps) {
   const { control } = useFormContext();
 
-  function handleChange() {}
-
   return (
     <Controller
       control={control}
       name={name}
       render={({ field: { onChange, value } }) => {
         function handleChange(event: ChangeEvent<HTMLInputElement>) {
-          onChange(event.target.value);
+          const file = event.target.files?.[0];
+          if (file) {
+            onChange(file);
+          }
         }
 
         return (
           <div className="flex flex-col gap-2">
             {label && <Label>{label}</Label>}
-            <Input onChange={handleChange} value={value} {...props} />
+            <Input onChange={handleChange} type="file" {...props} />
           </div>
         );
       }}
