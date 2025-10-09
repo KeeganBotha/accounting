@@ -12,7 +12,6 @@ import {
 import { Button } from "@/components/ui/button";
 import { AccountCsvSchema } from "@/app/private/finance-tracker/_data/financeTrackerSchema";
 import { RHFInput } from "@/components/controlled-components/RHFInput";
-import { Input } from "@/components/ui/input";
 import { RHFDiagnostic } from "@/components/controlled-components/RHFDiagnostic";
 
 type CsvDialogProps = {
@@ -32,6 +31,7 @@ export function CsvDialog({ accountId = 0, open, setOpen }: CsvDialogProps) {
 
   function handleOpenChange(isOpen: boolean) {
     setOpen(isOpen);
+    formMethods.reset();
   }
 
   function handleClose() {
