@@ -1,15 +1,15 @@
-import { ChangeEvent } from "react";
+import React, { ChangeEvent } from "react";
 import { Controller, useFormContext } from "react-hook-form";
 
 import { Input } from "../ui/input";
 import { Label } from "../ui/label";
 
-type RHFInputProps = {
+interface RHFInputProps extends React.ComponentProps<"input"> {
   name: string;
   label: string;
-};
+}
 
-export function RHFInput({ name, label }: RHFInputProps) {
+export function RHFInput({ name, label, ...props }: RHFInputProps) {
   const { control } = useFormContext();
 
   return (
@@ -24,7 +24,7 @@ export function RHFInput({ name, label }: RHFInputProps) {
         return (
           <div className="flex flex-col gap-2">
             {label && <Label>{label}</Label>}
-            <Input onChange={handleChange} value={value} />
+            <Input onChange={handleChange} value={value} {...props} />
           </div>
         );
       }}

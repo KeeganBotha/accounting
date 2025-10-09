@@ -11,6 +11,9 @@ import {
 } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { AccountCsvSchema } from "@/app/private/finance-tracker/_data/financeTrackerSchema";
+import { RHFInput } from "@/components/controlled-components/RHFInput";
+import { Input } from "@/components/ui/input";
+import { RHFDiagnostic } from "@/components/controlled-components/RHFDiagnostic";
 
 type CsvDialogProps = {
   accountId?: number;
@@ -23,7 +26,7 @@ export function CsvDialog({ accountId = 0, open, setOpen }: CsvDialogProps) {
     resolver: zodResolver(AccountCsvSchema),
     defaultValues: {
       accountId: accountId ?? 0,
-      file: {},
+      file: "",
     },
   });
 
@@ -45,7 +48,8 @@ export function CsvDialog({ accountId = 0, open, setOpen }: CsvDialogProps) {
         <DialogDescription hidden />
         <FormProvider {...formMethods}>
           <form onSubmit={handleSubmit} className="flex flex-col gap-4">
-            <>CSV Uploader goes here...</>
+            <RHFDiagnostic />
+            <RHFInput type="file" label="Upload File" name="file" />
             <div className="flex flex-row justify-between">
               <Button onClick={handleClose} variant="secondary">
                 Cancel
