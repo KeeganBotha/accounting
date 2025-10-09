@@ -1,19 +1,18 @@
 import { z } from "zod";
 import { financeTrackerProvider } from "./financeTrackerProvider";
-import { AccountRecordSchema, AccountSchema } from "./financeTrackerSchema";
-import { asOption } from "@/lib/utils";
+import {
+  AccountCsvSchema,
+  AccountRecordSchema,
+  AccountSchema,
+} from "./financeTrackerSchema";
+
+import { utils, read } from "xlsx";
 
 export function financeTrackerService(serverCtx: ServerCtxType) {
   const _provider = financeTrackerProvider(serverCtx);
 
   async function getPersonalAccounts(search: string) {
     const result = await _provider.getPersonalAccounts(search);
-
-    return result;
-  }
-
-  async function getFamilyAccounts(search: string) {
-    const result = await _provider.getFamilyAccounts(search);
 
     return result;
   }
@@ -52,12 +51,26 @@ export function financeTrackerService(serverCtx: ServerCtxType) {
     return result;
   }
 
+  async function mutateAccountRecordCsv(
+    input: z.infer<typeof AccountCsvSchema>
+  ) {
+    const file = await input.file.arrayBuffer();
+    const workbook = read(file, { type: "array" });
+
+    const sheetName = workbook.SheetNames[0];
+    const worksheet = workbook.Sheets[sheetName];
+
+    const json = utils.sheet_to_json(worksheet, { defval: "" });
+
+    return json;
+  }
+
   return {
     getAccount,
-    getFamilyAccounts,
     getPersonalAccounts,
     mutateAccount,
     mutateAccountRecord,
+    mutateAccountRecordCsv,
     deleteAccount,
   };
 }

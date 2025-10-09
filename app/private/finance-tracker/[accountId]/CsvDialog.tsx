@@ -13,6 +13,8 @@ import { Button } from "@/components/ui/button";
 import { AccountCsvSchema } from "@/app/private/finance-tracker/_data/financeTrackerSchema";
 import { RHFInput } from "@/components/controlled-components/RHFInput";
 import { RHFDiagnostic } from "@/components/controlled-components/RHFDiagnostic";
+import { handleSafeActionResult } from "@/lib/utils";
+import { mutateAccountRecordCsv } from "./action";
 
 type CsvDialogProps = {
   accountId?: number;
@@ -39,7 +41,9 @@ export function CsvDialog({ accountId = 0, open, setOpen }: CsvDialogProps) {
     formMethods.reset();
   }
 
-  const handleSubmit = formMethods.handleSubmit(async (formData) => {});
+  const handleSubmit = formMethods.handleSubmit(async (formData) => {
+    handleSafeActionResult(await mutateAccountRecordCsv(formData));
+  });
 
   return (
     <Dialog open={open} onOpenChange={handleOpenChange}>
