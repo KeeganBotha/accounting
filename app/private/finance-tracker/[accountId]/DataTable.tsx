@@ -1,5 +1,7 @@
 "use client";
 
+import React from "react";
+import Link from "next/link";
 import {
   ColumnDef,
   flexRender,
@@ -15,13 +17,13 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { MutateDialog } from "./MutateDialog";
+
+import { Icon } from "@/components/icon";
 import { Search } from "@/components/search";
 import { Button } from "@/components/ui/button";
-import { Icon } from "@/components/icon";
-import React from "react";
+
 import { CsvDialog } from "./CsvDialog";
-import Link from "next/link";
+import { MutateDialog } from "./MutateDialog";
 
 interface DataTableProps<TData, TValue> {
   accountId: number;
@@ -55,7 +57,7 @@ export function DataTable<TData, TValue>({
 
   return (
     <div className="flex flex-col gap-4 grow w-full">
-      <div className="flex flex-row justify-between">
+      <div className="flex flex-row justify-between mt-1">
         <Search />
 
         <div className="flex flex-row gap-4">
@@ -73,7 +75,7 @@ export function DataTable<TData, TValue>({
         </div>
       </div>
 
-      <div className="rounded-md border w-full">
+      <div className="rounded-md border w-full overflow-y-auto max-h-[calc(100dvh-11rem)]">
         <Table>
           <TableHeader>
             {table.getHeaderGroups().map((headerGroup) => (
