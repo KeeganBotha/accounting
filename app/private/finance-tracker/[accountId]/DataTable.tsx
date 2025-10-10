@@ -21,6 +21,9 @@ import { Button } from "@/components/ui/button";
 import { Icon } from "@/components/icon";
 import React from "react";
 import { CsvDialog } from "./CsvDialog";
+import { handleSafeActionResult } from "@/lib/utils";
+import { getAccountRecordCsvTemplate } from "./action";
+import Link from "next/link";
 
 interface DataTableProps<TData, TValue> {
   accountId: number;
@@ -64,6 +67,11 @@ export function DataTable<TData, TValue>({
           <Button onClick={handleOpenCSV}>
             <Icon iconName="Upload" /> CSV
           </Button>
+          <Link href="/api/csv-template">
+            <Button>
+              <Icon iconName="Download" /> Template
+            </Button>
+          </Link>
         </div>
       </div>
 

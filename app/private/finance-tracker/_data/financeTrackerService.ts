@@ -1,12 +1,15 @@
 import { z } from "zod";
-import { financeTrackerProvider } from "./financeTrackerProvider";
+import { utils, read } from "xlsx";
+
 import {
   AccountCsvSchema,
   AccountRecordSchema,
   AccountSchema,
 } from "./financeTrackerSchema";
+import { financeTrackerProvider } from "./financeTrackerProvider";
 
-import { utils, read } from "xlsx";
+// Needed for validation at a later stage
+// const REQUIRED_CSV_COLUMNS = ["Date", "Description", "Amount", "Balance"];
 
 export function financeTrackerService(serverCtx: ServerCtxType) {
   const _provider = financeTrackerProvider(serverCtx);
