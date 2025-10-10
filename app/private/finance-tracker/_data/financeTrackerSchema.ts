@@ -1,10 +1,13 @@
 import { z } from "zod";
 
-const DateSchema = z.coerce
+const DateSchema = z
   .string()
-  .regex(/^\d{2}\/\d{2}\/\d{4}$/, "Date must be DD/MM/YYYY")
+  .regex(/^\d{8}$/, "Date must be in YYYYMMDD format")
   .transform((val) => {
-    const [day, month, year] = val.split("/").map(Number);
+    const year = Number(val.slice(0, 4));
+    const month = Number(val.slice(4, 6));
+    const day = Number(val.slice(6, 8));
+
     return new Date(year, month - 1, day);
   });
 

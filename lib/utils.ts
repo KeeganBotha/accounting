@@ -1,5 +1,6 @@
-import { format } from "date-fns";
+import { z } from "zod";
 import { toast } from "sonner";
+import { format } from "date-fns";
 import { utils, read } from "xlsx";
 import { twMerge } from "tailwind-merge";
 import { clsx, type ClassValue } from "clsx";
@@ -8,7 +9,6 @@ import { SafeActionResult } from "next-safe-action";
 import { AccountCsvShapeSchema } from "@/app/private/finance-tracker/_data/financeTrackerSchema";
 
 import { getErrorMessage } from "./get-error-message";
-import { z } from "zod";
 
 const REQUIRED_CSV_COLUMNS = ["date", "description", "amount", "balance"];
 
@@ -62,7 +62,7 @@ export function validateAndParseCsv(file: any) {
   const workbook = read(file, { type: "array" });
   const sheetName = workbook.SheetNames[0];
   const worksheet = workbook.Sheets[sheetName];
-  const rows = utils.sheet_to_json(worksheet, { defval: "" });
+  const rows = utils.sheet_to_json(worksheet, { defval: "", raw: false });
 
   const actualColumnNames = Object.keys(rows[0] || {});
   const missingColumns = REQUIRED_CSV_COLUMNS.filter(
@@ -82,26 +82,14 @@ export function validateAndParseCsv(file: any) {
   );
 
   for (const [i, cleanRow] of cleanedRows.entries()) {
-    if (
-      typeof cleanRow["date"] === "number" &&
-      cleanRow["date"] > 20000 &&
-      cleanRow["date"] < 60000
-    ) {
-      const excelEpoch = new Date(1900, 0, 1);
-      const daysOffset = cleanRow["date"] - 2; // Excel’s 1900 leap year bug
-      cleanRow["date"] = format(
-        new Date(excelEpoch.getTime() + daysOffset * 86400000),
-        "dd/MM/yyyy"
-      );
-    }
-
     const parsed = AccountCsvShapeSchema.safeParse(cleanRow);
 
     if (!parsed.success) {
-      const err = parsed.error.issues
-        .map((e) => `${e.path.join(".")}: ${e.message}`)
+      const error = parsed.error.issues
+        .map((err) => `${err.path.join(".")}: ${err.message}`)
         .join(", ");
-      throw new Error(`Row ${i + 1} invalid → ${err}`);
+
+      throw new Error(`Row ${i + 1} invalid → ${error}`);
     }
 
     result.push(parsed.data);
