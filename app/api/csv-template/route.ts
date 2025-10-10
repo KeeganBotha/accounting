@@ -3,7 +3,7 @@ import { utils, write } from "xlsx";
 
 export async function GET() {
   const sheet = utils.aoa_to_sheet([
-    ["Date", "Description", "Amount (R)", "Balance (R)"],
+    ["date", "description", "amount", "balance"],
   ]);
 
   const wb = utils.book_new();

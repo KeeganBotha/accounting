@@ -1,5 +1,13 @@
 import { z } from "zod";
 
+const DateSchema = z.coerce
+  .string()
+  .regex(/^\d{2}\/\d{2}\/\d{4}$/, "Date must be DD/MM/YYYY")
+  .transform((val) => {
+    const [day, month, year] = val.split("/").map(Number);
+    return new Date(year, month - 1, day);
+  });
+
 export const AccountSchema = z.object({
   accountId: z.number(),
   accountName: z.string(),
@@ -25,4 +33,11 @@ export const AccountRecordSchema = z.object({
 export const AccountCsvSchema = z.object({
   accountId: z.coerce.number(),
   file: z.any(),
+});
+
+export const AccountCsvShapeSchema = z.object({
+  date: DateSchema,
+  amount: z.coerce.number(),
+  description: z.string(),
+  balance: z.coerce.number(),
 });

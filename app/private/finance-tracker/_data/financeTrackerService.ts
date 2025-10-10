@@ -1,5 +1,6 @@
 import { z } from "zod";
-import { utils, read } from "xlsx";
+
+import { validateAndParseCsv } from "@/lib/utils";
 
 import {
   AccountCsvSchema,
@@ -7,9 +8,6 @@ import {
   AccountSchema,
 } from "./financeTrackerSchema";
 import { financeTrackerProvider } from "./financeTrackerProvider";
-
-// Needed for validation at a later stage
-// const REQUIRED_CSV_COLUMNS = ["Date", "Description", "Amount", "Balance"];
 
 export function financeTrackerService(serverCtx: ServerCtxType) {
   const _provider = financeTrackerProvider(serverCtx);
@@ -58,14 +56,9 @@ export function financeTrackerService(serverCtx: ServerCtxType) {
     input: z.infer<typeof AccountCsvSchema>
   ) {
     const file = await input.file.arrayBuffer();
-    const workbook = read(file, { type: "array" });
+    const data = validateAndParseCsv(file);
 
-    const sheetName = workbook.SheetNames[0];
-    const worksheet = workbook.Sheets[sheetName];
-
-    const json = utils.sheet_to_json(worksheet, { defval: "" });
-
-    return json;
+    return true;
   }
 
   return {
