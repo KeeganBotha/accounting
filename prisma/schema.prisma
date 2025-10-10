@@ -69,15 +69,13 @@ model AccountRecordType {
   createdBy      Int
   creator        User            @relation(fields: [createdBy], references: [id])
 
-  records        AccountRecord[]
-
   @@map("account_record_type")
 }
 
 model AccountRecord {
   id                   Int                @id @default(autoincrement())
   accountId            Int
-  accountRecordTypeId  Int
+  
   value                Decimal
   createdBy            Int
   createdAt            DateTime           @default(now())
@@ -87,7 +85,7 @@ model AccountRecord {
   creator              User               @relation("CreatedBy", fields: [createdBy], references: [id])
   updator              User               @relation("UpdatedBy", fields: [updatedBy], references: [id])
   account              Account            @relation(fields: [accountId], references: [id])
-  recordType           AccountRecordType  @relation(fields: [accountRecordTypeId], references: [id])
+ 
 
   @@map("account_record")
 }

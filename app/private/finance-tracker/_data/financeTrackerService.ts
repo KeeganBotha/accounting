@@ -36,7 +36,7 @@ export function financeTrackerService(serverCtx: ServerCtxType) {
       return {
         id: +record.id,
         amount: +record.value,
-        recordType: record.recordType.name,
+        recordType: "Not Specified",
         createdAt: record.createdAt.toString(),
       };
     });
@@ -57,8 +57,9 @@ export function financeTrackerService(serverCtx: ServerCtxType) {
   ) {
     const file = await input.file.arrayBuffer();
     const data = validateAndParseCsv(file);
+    const result = await _provider.mutateAccountRecords(data, input.accountId);
 
-    return true;
+    return result;
   }
 
   return {

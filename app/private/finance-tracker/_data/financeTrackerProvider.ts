@@ -1,6 +1,12 @@
-import { _db } from "@/database/db";
-import { AccountRecordSchema, AccountSchema } from "./financeTrackerSchema";
 import { z } from "zod";
+
+import { _db } from "@/database/db";
+
+import {
+  AccountCsvShapeSchema,
+  AccountRecordSchema,
+  AccountSchema,
+} from "./financeTrackerSchema";
 
 export function financeTrackerProvider(serverCtx: ServerCtxType) {
   async function getPersonalAccounts(search: string) {
@@ -79,11 +85,7 @@ export function financeTrackerProvider(serverCtx: ServerCtxType) {
   async function getAccount(accountId: number) {
     const result = await _db.account.findFirst({
       include: {
-        accountRecords: {
-          include: {
-            recordType: true,
-          },
-        },
+        accountRecords: true,
       },
       where: {
         id: accountId,
@@ -102,7 +104,7 @@ export function financeTrackerProvider(serverCtx: ServerCtxType) {
       create: {
         value: input.value,
         accountId: input.accountId,
-        accountRecordTypeId: +input.accountRecordTypeId,
+        // accountRecordTypeId: +input.accountRecordTypeId,
         createdBy: serverCtx.id,
         createdAt: currentDate,
         updatedBy: serverCtx.id,
@@ -110,7 +112,7 @@ export function financeTrackerProvider(serverCtx: ServerCtxType) {
       update: {
         value: input.value,
         accountId: input.accountId,
-        accountRecordTypeId: 1,
+        // accountRecordTypeId: 1,
         updatedBy: serverCtx.id,
         updatedAt: currentDate,
       },
@@ -125,12 +127,32 @@ export function financeTrackerProvider(serverCtx: ServerCtxType) {
     return false;
   }
 
+  async function mutateAccountRecords(
+    input: z.infer<typeof AccountCsvShapeSchema>[],
+    accountId: number
+  ) {
+    const result = await _db.accountRecord.createMany({
+      data: input.map((i) => {
+        return {
+          accountId: accountId,
+          value: i.amount,
+          createdAt: i.date,
+          createdBy: serverCtx.id,
+          updatedBy: serverCtx.id,
+        };
+      }),
+    });
+
+    return result;
+  }
+
   return {
     getAccount,
     getFamilyAccounts,
     getPersonalAccounts,
     mutateAccount,
     mutateAccountRecord,
+    mutateAccountRecords,
     deleteAccount,
   };
 }
