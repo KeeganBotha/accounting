@@ -1,6 +1,7 @@
 "use client";
 
 import { ColumnDef } from "@tanstack/react-table";
+import { format } from "date-fns";
 
 export type Payment = {
   id: number;
@@ -25,5 +26,6 @@ export const columns: ColumnDef<Payment>[] = [
   {
     accessorKey: "createdAt",
     header: "Created At",
+    cell: ({ getValue }) => <>{format(getValue() as string, "dd/MM/yyyy")}</>,
   },
 ];

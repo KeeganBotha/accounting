@@ -75,8 +75,9 @@ model AccountRecordType {
 model AccountRecord {
   id                   Int                @id @default(autoincrement())
   accountId            Int
-  
   value                Decimal
+  description          String
+
   createdBy            Int
   createdAt            DateTime           @default(now())
   updatedBy            Int

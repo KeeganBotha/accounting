@@ -136,6 +136,7 @@ export function financeTrackerProvider(serverCtx: ServerCtxType) {
         return {
           accountId: accountId,
           value: i.amount,
+          description: i.description,
           createdAt: i.date,
           createdBy: serverCtx.id,
           updatedBy: serverCtx.id,
