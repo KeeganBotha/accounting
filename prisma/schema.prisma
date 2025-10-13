@@ -14,9 +14,11 @@ model User {
 
   accounts      Account[]
   accountTypes  AccountType[]
-  recordTypes   AccountRecordType[]
-  creatorAccountRecords AccountRecord[] @relation("CreatedBy")
-  updatorAccountRecords AccountRecord[] @relation("UpdatedBy")
+
+  transactionCategories TransactionCategory[]
+  transactionCategoryGroups TransactionCategoryGroup[]
+  creatorTransactions Transaction[] @relation("CreatedBy")
+  updatorTransactions Transaction[] @relation("UpdatedBy")
 
   @@map("user")
 }
@@ -57,22 +59,34 @@ model Account {
   updatedAt      DateTime      @updatedAt
   isActive       Boolean
 
-  accountRecords        AccountRecord[]
+  transactions   Transaction[]
 
   @@map("accounts")
 }
 
-model AccountRecordType {
+model TransactionCategoryGroup {
+  id            Int @id @default(autoincrement())
+  name          String
+  iconName      String?
+  createdBy     Int
+  
+  creator       User @relation(fields: [createdBy], references: [id])
+
+  @@map("transaction_category_group")
+}
+
+model TransactionCategory {
   id             Int             @id @default(autoincrement())
   name           String
   iconName       String?
   createdBy      Int
+
   creator        User            @relation(fields: [createdBy], references: [id])
 
-  @@map("account_record_type")
+  @@map("transaction_category")
 }
 
-model AccountRecord {
+model Transaction {
   id                   Int                @id @default(autoincrement())
   accountId            Int
   value                Decimal
@@ -87,22 +101,5 @@ model AccountRecord {
   updator              User               @relation("UpdatedBy", fields: [updatedBy], references: [id])
   account              Account            @relation(fields: [accountId], references: [id])
  
-
-  @@map("account_record")
-}
-
-model Member {
-  id              Int       @id @default(autoincrement())
-  first_name      String
-  last_name       String
-  middle_name     String
-  identity_number Int
-  cell            String
-  email           String
-  expiration_date DateTime
-  has_paid        Boolean   @default(false)
-  created_on      DateTime  @default(now())
-  updated_on      DateTime
-
-  @@map("member")
+  @@map("transaction")
 }

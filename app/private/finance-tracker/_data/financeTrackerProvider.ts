@@ -85,7 +85,7 @@ export function financeTrackerProvider(serverCtx: ServerCtxType) {
   async function getAccount(accountId: number) {
     const result = await _db.account.findFirst({
       include: {
-        accountRecords: true,
+        transactions: true,
       },
       where: {
         id: accountId,
@@ -100,9 +100,10 @@ export function financeTrackerProvider(serverCtx: ServerCtxType) {
   ) {
     const currentDate = new Date();
 
-    const result = await _db.accountRecord.upsert({
+    const result = await _db.transaction.upsert({
       create: {
         value: input.value,
+        description: "",
         accountId: input.accountId,
         // accountRecordTypeId: +input.accountRecordTypeId,
         createdBy: serverCtx.id,
@@ -111,6 +112,7 @@ export function financeTrackerProvider(serverCtx: ServerCtxType) {
       },
       update: {
         value: input.value,
+        description: "",
         accountId: input.accountId,
         // accountRecordTypeId: 1,
         updatedBy: serverCtx.id,
@@ -131,7 +133,7 @@ export function financeTrackerProvider(serverCtx: ServerCtxType) {
     input: z.infer<typeof AccountCsvShapeSchema>[],
     accountId: number
   ) {
-    const result = await _db.accountRecord.createMany({
+    const result = await _db.transaction.createMany({
       data: input.map((i) => {
         return {
           accountId: accountId,
