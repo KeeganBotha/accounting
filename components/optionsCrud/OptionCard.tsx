@@ -33,14 +33,14 @@ export function OptionCard({ option, onDelete, onEdit }: OptionCardProps) {
               {splitCamelCase(safeIconName)}
             </p>
           </div>
-          {/* <div className="flex gap-4">
+          <div className="flex gap-4">
             <MutateDialog option={option} onSubmit={onEdit} title="Edit Option">
               <Button variant="outline" size="icon">
                 <Icon iconName="Edit" />
               </Button>
             </MutateDialog>
             <DeleteDialog onDelete={handleDelete} name={text} />
-          </div> */}
+          </div>
         </div>
       </CardContent>
     </Card>
