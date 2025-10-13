@@ -71,6 +71,7 @@ model TransactionCategoryGroup {
   createdBy     Int
   
   creator       User @relation(fields: [createdBy], references: [id])
+  transactionCategories TransactionCategory[]
 
   @@map("transaction_category_group")
 }
@@ -80,8 +81,12 @@ model TransactionCategory {
   name           String
   iconName       String?
   createdBy      Int
+  transactionCategoryGroupId Int?
+
+  transactions   Transaction[]
 
   creator        User            @relation(fields: [createdBy], references: [id])
+  transactionCategoryGroup TransactionCategoryGroup? @relation(fields:[transactionCategoryGroupId], references: [id])
 
   @@map("transaction_category")
 }
@@ -89,6 +94,7 @@ model TransactionCategory {
 model Transaction {
   id                   Int                @id @default(autoincrement())
   accountId            Int
+  transactionCategoryId Int
   value                Decimal
   description          String
 
@@ -100,6 +106,7 @@ model Transaction {
   creator              User               @relation("CreatedBy", fields: [createdBy], references: [id])
   updator              User               @relation("UpdatedBy", fields: [updatedBy], references: [id])
   account              Account            @relation(fields: [accountId], references: [id])
+  transactionCategory  TransactionCategory  @relation(fields: [transactionCategoryId], references: [id])
  
   @@map("transaction")
 }
