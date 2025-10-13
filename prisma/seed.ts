@@ -46,6 +46,20 @@ async function main() {
         iconName: "",
         parentId: 5,
       },
+      {
+        id: 7,
+        name: "Transaction Categories",
+        path: "/private/settings/transaction-category",
+        iconName: "",
+        parentId: 5,
+      },
+      {
+        id: 8,
+        name: "Transaction Category Group",
+        path: "/private/settings/transaction-category-group",
+        iconName: "",
+        parentId: 5,
+      },
     ],
   });
 
