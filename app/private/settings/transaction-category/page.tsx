@@ -1,4 +1,4 @@
-import { AccountType } from "./AccountType";
+import { AccountType } from "./TransactionCategory";
 import { getAccountTypes } from "./action";
 
 type PageProps = {

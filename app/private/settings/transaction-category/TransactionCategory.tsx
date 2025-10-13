@@ -3,19 +3,19 @@
 import { handleSafeActionResult } from "@/lib/utils";
 import { OptionsCrud } from "@/components/optionsCrud";
 
-import { deleteAccountType, mutateAccountType } from "./action";
+import { deleteTransactionCategory, mutateTransactionCategory } from "./action";
 
-type AccountTypeProps = {
+type TransactionCategoryProps = {
   options: OptionType[];
 };
 
-export function AccountType({ options }: AccountTypeProps) {
+export function TransactionCategory({ options }: TransactionCategoryProps) {
   async function handleMutate(option: OptionType) {
-    handleSafeActionResult(await mutateAccountType(option));
+    handleSafeActionResult(await mutateTransactionCategory(option));
   }
 
   async function handleDelete(id: number) {
-    handleSafeActionResult(await deleteAccountType(id));
+    handleSafeActionResult(await deleteTransactionCategory(id));
   }
 
   return (

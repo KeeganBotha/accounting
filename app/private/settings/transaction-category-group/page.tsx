@@ -1,5 +1,5 @@
-import { AccountType } from "./AccountType";
-import { getAccountTypes } from "./action";
+import { TransactionCategoryGroup } from "./TransactionCategoryGroup";
+import { getTransactionCategoryGroups } from "./action";
 
 type PageProps = {
   searchParams: Promise<{ search: string }>;
@@ -7,8 +7,8 @@ type PageProps = {
 
 export default async function Page({ searchParams }: PageProps) {
   const { search } = await searchParams;
-  const query = await getAccountTypes(search ?? "");
+  const query = await getTransactionCategoryGroups(search ?? "");
   const options = query?.data?.result ?? [];
 
-  return <AccountType options={options} />;
+  return <TransactionCategoryGroup options={options} />;
 }
