@@ -32,12 +32,12 @@ export function financeTrackerService(serverCtx: ServerCtxType) {
 
   async function getAccount(accountId: number) {
     const rawResult = await _provider.getAccount(accountId);
-    const result = rawResult?.accountRecords.map((record) => {
+    const result = rawResult?.transactions.map((transaction) => {
       return {
-        id: +record.id,
-        amount: +record.value,
+        id: +transaction.id,
+        amount: +transaction.value,
         recordType: "Not Specified",
-        createdAt: record.createdAt.toString(),
+        createdAt: transaction.createdAt.toString(),
       };
     });
 

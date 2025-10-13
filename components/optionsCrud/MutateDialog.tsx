@@ -22,17 +22,12 @@ type MutateDialog = {
   option?: OptionType;
   onSubmit: (option: OptionType) => Promise<void>;
   children: React.ReactNode;
-
-  isLinkedOption?: boolean;
-  linkingOptions?: OptionType[];
-  linkingOptionsLabel?: string;
 };
 
 const defaultValues = {
   text: "",
   value: "0",
   iconName: "",
-  linkedIds: [],
 };
 
 export function MutateDialog({
@@ -40,10 +35,6 @@ export function MutateDialog({
   title,
   option = defaultValues,
   children,
-
-  isLinkedOption = false,
-  linkingOptions = [],
-  linkingOptionsLabel = "Links",
 }: MutateDialog) {
   const formMethods = useForm({
     resolver: zodResolver(OptionSchema),
@@ -64,13 +55,6 @@ export function MutateDialog({
           <form className="flex flex-col gap-4" onSubmit={handleSubmit}>
             <RHFInput label="Type" name="text" />
             <RHFSelect label="Icon" name="iconName" options={ICON_OPTIONS} />
-            {isLinkedOption && (
-              <RHFSelect
-                label={linkingOptionsLabel}
-                name="links"
-                options={linkingOptions}
-              />
-            )}
             <div className="flex flex-row justify-between">
               <DialogClose asChild>
                 <Button variant="secondary">Cancel</Button>
