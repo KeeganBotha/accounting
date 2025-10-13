@@ -17,47 +17,10 @@ export function settingsProvider(serverCtx: ServerCtxType) {
     return result;
   }
 
-  async function getAccountRecordTypes(search: string) {
-    const result = await _db.accountRecordType.findMany({
-      where: {
-        createdBy: {
-          in: [1, serverCtx.id],
-        },
-        name: {
-          contains: search,
-          mode: "insensitive",
-        },
-      },
-    });
-
-    return result;
-  }
-
   async function mutateAccountType(input: OptionType) {
     const { iconName, text, value } = input;
 
     const result = await _db.accountType.upsert({
-      create: {
-        name: text,
-        iconName: iconName,
-        createdBy: serverCtx.id,
-      },
-      update: {
-        name: text,
-        iconName: iconName,
-      },
-      where: {
-        id: +value,
-      },
-    });
-
-    return result;
-  }
-
-  async function mutateAccountRecordType(input: OptionType) {
-    const { iconName, text, value } = input;
-
-    const result = await _db.accountRecordType.upsert({
       create: {
         name: text,
         iconName: iconName,
@@ -89,8 +52,45 @@ export function settingsProvider(serverCtx: ServerCtxType) {
     return result;
   }
 
-  async function deleteAccountRecordType(id: number) {
-    const result = await _db.accountType.delete({
+  async function getTransactionCategories(search: string) {
+    const result = await _db.transactionCategory.findMany({
+      where: {
+        createdBy: {
+          in: [1, serverCtx.id],
+        },
+        name: {
+          contains: search,
+          mode: "insensitive",
+        },
+      },
+    });
+
+    return result;
+  }
+
+  async function mutateTransactionCategory(input: OptionType) {
+    const { iconName, text, value } = input;
+
+    const result = await _db.transactionCategory.upsert({
+      create: {
+        name: text,
+        iconName: iconName,
+        createdBy: serverCtx.id,
+      },
+      update: {
+        name: text,
+        iconName: iconName,
+      },
+      where: {
+        id: +value,
+      },
+    });
+
+    return result;
+  }
+
+  async function deleteTransactionCategory(id: number) {
+    const result = await _db.transactionCategory.delete({
       where: {
         id: id,
         createdBy: serverCtx.id,
@@ -105,10 +105,10 @@ export function settingsProvider(serverCtx: ServerCtxType) {
 
   return {
     getAccountTypes,
-    getAccountRecordTypes,
     mutateAccountType,
-    mutateAccountRecordType,
     deleteAccountType,
-    deleteAccountRecordType,
+    getTransactionCategories,
+    mutateTransactionCategory,
+    deleteTransactionCategory,
   };
 }

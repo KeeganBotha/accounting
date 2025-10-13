@@ -14,24 +14,8 @@ export function settingsService(serverCtx: ServerCtxType) {
     return result;
   }
 
-  async function getAccountRecordTypeOptions(search: string) {
-    const rawResult = await _provider.getAccountRecordTypes(search);
-
-    const result = rawResult.map((accountRecordType) =>
-      asOption(accountRecordType, "name", "iconName")
-    );
-
-    return result;
-  }
-
   async function mutateAccountType(input: OptionType) {
     const result = await _provider.mutateAccountType(input);
-
-    return result;
-  }
-
-  async function mutateAccountRecordType(input: OptionType) {
-    const result = await _provider.mutateAccountRecordType(input);
 
     return result;
   }
@@ -42,18 +26,33 @@ export function settingsService(serverCtx: ServerCtxType) {
     return result;
   }
 
-  async function deleteAccountRecordType(id: number) {
-    const result = await _provider.deleteAccountRecordType(id);
+  async function getTransactionCategories(search: string) {
+    const rawResult = await _provider.getTransactionCategories(search);
+    const result = rawResult.map((accountType) =>
+      asOption(accountType, "name", "iconName")
+    );
+
+    return result;
+  }
+
+  async function mutateTransactionCategory(input: OptionType) {
+    const result = await _provider.mutateTransactionCategory(input);
+
+    return result;
+  }
+
+  async function deleteTransactionCategory(id: number) {
+    const result = await _provider.deleteTransactionCategory(id);
 
     return result;
   }
 
   return {
-    getAccountRecordTypeOptions,
     getAccountTypes,
-    mutateAccountRecordType,
     mutateAccountType,
-    deleteAccountRecordType,
     deleteAccountType,
+    getTransactionCategories,
+    mutateTransactionCategory,
+    deleteTransactionCategory,
   };
 }
