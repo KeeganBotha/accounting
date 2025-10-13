@@ -24,7 +24,7 @@ export function OptionCard({ option, onDelete, onEdit }: OptionCardProps) {
   const safeIconName = iconName ? iconName : "Not Selected";
 
   return (
-    <Card className="h-fit">
+    <Card className="h-fit relative">
       <CardContent>
         <div className="flex flex-row items-center justify-between grow gap-4">
           <div className="flex flex-col gap-2 flex-1 min-w-0">
@@ -33,14 +33,14 @@ export function OptionCard({ option, onDelete, onEdit }: OptionCardProps) {
               {splitCamelCase(safeIconName)}
             </p>
           </div>
-          <div className="flex gap-4">
+          {/* <div className="flex gap-4">
             <MutateDialog option={option} onSubmit={onEdit} title="Edit Option">
               <Button variant="outline" size="icon">
                 <Icon iconName="Edit" />
               </Button>
             </MutateDialog>
             <DeleteDialog onDelete={handleDelete} name={text} />
-          </div>
+          </div> */}
         </div>
       </CardContent>
     </Card>
