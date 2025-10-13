@@ -58,7 +58,7 @@ export function settingsService(serverCtx: ServerCtxType) {
   // #region Transaction Category Groups
 
   async function getTransactionCategoryGroups(search: string) {
-    const rawResult = await _provider.getTransactionCategories(search);
+    const rawResult = await _provider.getTransactionCategoryGroups(search);
     const result = rawResult.map((accountType) =>
       asOption(accountType, "name", "iconName")
     );
