@@ -16,13 +16,13 @@ import { ICON_OPTIONS } from "../icon";
 import { OptionSchema } from "./schema";
 import { RHFInput } from "../controlled-components/RHFInput";
 import { RHFSelect } from "../controlled-components/RHFSelect";
-import { RHFDiagnostic } from "../controlled-components/RHFDiagnostic";
 
 type MutateDialog = {
   title: string;
   option?: OptionType;
   onSubmit: (option: OptionType) => Promise<void>;
   children: React.ReactNode;
+  categoryGroupOptions: OptionType[];
 };
 
 const defaultValues = {
@@ -36,6 +36,7 @@ export function MutateDialog({
   title,
   option = defaultValues,
   children,
+  categoryGroupOptions,
 }: MutateDialog) {
   const formMethods = useForm({
     resolver: zodResolver(OptionSchema),
@@ -54,9 +55,13 @@ export function MutateDialog({
         <DialogDescription hidden />
         <FormProvider {...formMethods}>
           <form className="flex flex-col gap-4" onSubmit={handleSubmit}>
-            <RHFDiagnostic />
             <RHFInput label="Type" name="text" />
             <RHFSelect label="Icon" name="iconName" options={ICON_OPTIONS} />
+            <RHFSelect
+              label="Category Group"
+              name="categoryGroup"
+              options={categoryGroupOptions}
+            />
             <div className="flex flex-row justify-between">
               <DialogClose asChild>
                 <Button variant="secondary">Cancel</Button>
