@@ -1,15 +1,19 @@
 "use client";
 
 import { handleSafeActionResult } from "@/lib/utils";
-import { OptionsCrud } from "@/components/optionsCrud";
 
 import { deleteTransactionCategory, mutateTransactionCategory } from "./action";
+import { LinkedOptionsCrud } from "@/components/linkedOptionsCrud";
 
 type TransactionCategoryProps = {
   options: OptionType[];
+  transactionCategoryGroupOptions: OptionType[];
 };
 
-export function TransactionCategory({ options }: TransactionCategoryProps) {
+export function TransactionCategory({
+  options,
+  transactionCategoryGroupOptions,
+}: TransactionCategoryProps) {
   async function handleMutate(option: OptionType) {
     handleSafeActionResult(await mutateTransactionCategory(option));
   }
@@ -19,10 +23,12 @@ export function TransactionCategory({ options }: TransactionCategoryProps) {
   }
 
   return (
-    <OptionsCrud
+    <LinkedOptionsCrud
       options={options}
       onDelete={handleDelete}
       onMutate={handleMutate}
+      linkedOptions={transactionCategoryGroupOptions}
+      linkedOptionLabel="Transaction Category Group"
     />
   );
 }

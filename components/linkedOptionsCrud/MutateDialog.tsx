@@ -22,7 +22,8 @@ type MutateDialog = {
   option?: OptionType;
   onSubmit: (option: OptionType) => Promise<void>;
   children: React.ReactNode;
-  categoryGroupOptions: OptionType[];
+  linkedOptions: OptionType[];
+  linkedOptionLabel: string;
 };
 
 const defaultValues = {
@@ -36,7 +37,8 @@ export function MutateDialog({
   title,
   option = defaultValues,
   children,
-  categoryGroupOptions,
+  linkedOptions,
+  linkedOptionLabel,
 }: MutateDialog) {
   const formMethods = useForm({
     resolver: zodResolver(OptionSchema),
@@ -58,9 +60,9 @@ export function MutateDialog({
             <RHFInput label="Type" name="text" />
             <RHFSelect label="Icon" name="iconName" options={ICON_OPTIONS} />
             <RHFSelect
-              label="Category Group"
-              name="categoryGroup"
-              options={categoryGroupOptions}
+              label={linkedOptionLabel}
+              name="linkedOption"
+              options={linkedOptions}
             />
             <div className="flex flex-row justify-between">
               <DialogClose asChild>

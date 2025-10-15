@@ -10,14 +10,16 @@ type LinkedOptionsCrudProps = {
   options: OptionType[];
   onMutate: (option: OptionType) => Promise<void>;
   onDelete: (id: number) => Promise<void>;
-  categoryGroupOptions: OptionType[];
+  linkedOptions: OptionType[];
+  linkedOptionLabel: string;
 };
 
 export function LinkedOptionsCrud({
   onMutate,
   options,
   onDelete,
-  categoryGroupOptions,
+  linkedOptions,
+  linkedOptionLabel,
 }: LinkedOptionsCrudProps) {
   return (
     <div className="flex flex-col gap-4 grow w-full">
@@ -27,7 +29,8 @@ export function LinkedOptionsCrud({
         <MutateDialog
           onSubmit={onMutate}
           title="Add Option"
-          categoryGroupOptions={categoryGroupOptions}
+          linkedOptions={linkedOptions}
+          linkedOptionLabel={linkedOptionLabel}
         >
           <Button>
             <Icon iconName="Add" /> Add

@@ -1,3 +1,4 @@
+import { getTransactionCategoryGroups } from "../transaction-category-group/action";
 import { TransactionCategory } from "./TransactionCategory";
 import { getTransactionCategories } from "./action";
 
@@ -7,8 +8,19 @@ type PageProps = {
 
 export default async function Page({ searchParams }: PageProps) {
   const { search } = await searchParams;
-  const query = await getTransactionCategories(search ?? "");
-  const options = query?.data?.result ?? [];
 
-  return <TransactionCategory options={options} />;
+  const [query, groupQuery] = await Promise.all([
+    getTransactionCategories(search ?? ""),
+    getTransactionCategoryGroups(""),
+  ]);
+
+  const options = query?.data?.result ?? [];
+  const transactionCategoryGroupOptions = groupQuery?.data?.result ?? [];
+
+  return (
+    <TransactionCategory
+      options={options}
+      transactionCategoryGroupOptions={transactionCategoryGroupOptions}
+    />
+  );
 }
