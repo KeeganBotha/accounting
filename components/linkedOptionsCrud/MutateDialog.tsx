@@ -16,6 +16,7 @@ import { ICON_OPTIONS } from "../icon";
 import { LinkedOptionSchema, OptionSchema } from "./schema";
 import { RHFInput } from "../controlled-components/RHFInput";
 import { RHFSelect } from "../controlled-components/RHFSelect";
+import { RHFDiagnostic } from "../controlled-components/RHFDiagnostic";
 
 type MutateDialog = {
   title: string;
@@ -46,9 +47,14 @@ export function MutateDialog({
     defaultValues: { ...option },
   });
 
-  const handleSubmit = formMethods.handleSubmit(async (formData) => {
-    await onSubmit(formData);
-  });
+  const handleSubmit = formMethods.handleSubmit(
+    async (formData) => {
+      await onSubmit(formData);
+    },
+    (error) => {
+      const x = error;
+    }
+  );
 
   return (
     <Dialog>
@@ -58,6 +64,7 @@ export function MutateDialog({
         <DialogDescription hidden />
         <FormProvider {...formMethods}>
           <form className="flex flex-col gap-4" onSubmit={handleSubmit}>
+            <RHFDiagnostic />
             <RHFInput label="Type" name="text" />
             <RHFSelect label="Icon" name="iconName" options={ICON_OPTIONS} />
             <RHFSelect
@@ -69,9 +76,9 @@ export function MutateDialog({
               <DialogClose asChild>
                 <Button variant="secondary">Cancel</Button>
               </DialogClose>
-              <DialogClose asChild>
-                <Button type="submit">Submit</Button>
-              </DialogClose>
+              {/* <DialogClose asChild> */}
+              <Button type="submit">Submit</Button>
+              {/* </DialogClose> */}
             </div>
           </form>
         </FormProvider>

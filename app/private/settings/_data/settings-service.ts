@@ -42,7 +42,7 @@ export function settingsService(serverCtx: ServerCtxType) {
     return result;
   }
 
-  async function mutateTransactionCategory(input: OptionType) {
+  async function mutateTransactionCategory(input: LinkedOptionType) {
     const result = await _provider.mutateTransactionCategory(input);
 
     return result;

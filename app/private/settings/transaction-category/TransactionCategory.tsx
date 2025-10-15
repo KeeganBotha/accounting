@@ -14,7 +14,7 @@ export function TransactionCategory({
   options,
   transactionCategoryGroupOptions,
 }: TransactionCategoryProps) {
-  async function handleMutate(option: OptionType) {
+  async function handleMutate(option: LinkedOptionType) {
     handleSafeActionResult(await mutateTransactionCategory(option));
   }
 

@@ -7,5 +7,5 @@ export const OptionSchema = z.object({
 });
 
 export const LinkedOptionSchema = OptionSchema.extend({
-  linkedOptionId: z.number().nullable(),
+  linkedOptionId: z.coerce.number().nullable(),
 });

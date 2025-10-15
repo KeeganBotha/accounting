@@ -4,7 +4,7 @@ import { z } from "zod";
 import { revalidatePath } from "next/cache";
 import { privateProcedure } from "@/lib/safe-action";
 
-import { OptionSchema } from "@/components/optionsCrud/schema";
+import { LinkedOptionSchema } from "@/components/linkedOptionsCrud/schema";
 
 export const getTransactionCategories = privateProcedure
   .schema(z.string())
@@ -16,7 +16,7 @@ export const getTransactionCategories = privateProcedure
   });
 
 export const mutateTransactionCategory = privateProcedure
-  .schema(OptionSchema)
+  .schema(LinkedOptionSchema)
   .action(async ({ ctx, parsedInput }) => {
     const result =
       await ctx.svc.settingsService.mutateTransactionCategory(parsedInput);
