@@ -5,3 +5,7 @@ export const OptionSchema = z.object({
   value: z.string(),
   iconName: z.string(),
 });
+
+export const LinkedOptionSchema = OptionSchema.extend({
+  linkedOptionId: z.number().nullable(),
+});

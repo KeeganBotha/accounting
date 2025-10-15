@@ -6,7 +6,7 @@ import { deleteTransactionCategory, mutateTransactionCategory } from "./action";
 import { LinkedOptionsCrud } from "@/components/linkedOptionsCrud";
 
 type TransactionCategoryProps = {
-  options: OptionType[];
+  options: LinkedOptionType[];
   transactionCategoryGroupOptions: OptionType[];
 };
 

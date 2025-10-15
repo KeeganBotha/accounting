@@ -7,7 +7,7 @@ import { OptionCard } from "./OptionCard";
 import { MutateDialog } from "./MutateDialog";
 
 type LinkedOptionsCrudProps = {
-  options: OptionType[];
+  options: LinkedOptionType[];
   onMutate: (option: OptionType) => Promise<void>;
   onDelete: (id: number) => Promise<void>;
   linkedOptions: OptionType[];

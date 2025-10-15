@@ -13,14 +13,14 @@ import {
 } from "../ui/dialog";
 import { Button } from "../ui/button";
 import { ICON_OPTIONS } from "../icon";
-import { OptionSchema } from "./schema";
+import { LinkedOptionSchema, OptionSchema } from "./schema";
 import { RHFInput } from "../controlled-components/RHFInput";
 import { RHFSelect } from "../controlled-components/RHFSelect";
 
 type MutateDialog = {
   title: string;
-  option?: OptionType;
-  onSubmit: (option: OptionType) => Promise<void>;
+  option?: LinkedOptionType;
+  onSubmit: (option: LinkedOptionType) => Promise<void>;
   children: React.ReactNode;
   linkedOptions: OptionType[];
   linkedOptionLabel: string;
@@ -30,6 +30,7 @@ const defaultValues = {
   text: "",
   value: "0",
   iconName: "",
+  linkedOptionId: null,
 };
 
 export function MutateDialog({
@@ -41,7 +42,7 @@ export function MutateDialog({
   linkedOptionLabel,
 }: MutateDialog) {
   const formMethods = useForm({
-    resolver: zodResolver(OptionSchema),
+    resolver: zodResolver(LinkedOptionSchema),
     defaultValues: { ...option },
   });
 
@@ -61,7 +62,7 @@ export function MutateDialog({
             <RHFSelect label="Icon" name="iconName" options={ICON_OPTIONS} />
             <RHFSelect
               label={linkedOptionLabel}
-              name="linkedOption"
+              name="linkedOptionId"
               options={linkedOptions}
             />
             <div className="flex flex-row justify-between">

@@ -1,6 +1,7 @@
 import { asOption } from "@/lib/utils";
 
 import { settingsProvider } from "./settings-provider";
+import { transactionCategoryMapper } from "./settings-mapper";
 
 export function settingsService(serverCtx: ServerCtxType) {
   const _provider = settingsProvider(serverCtx);
@@ -34,8 +35,8 @@ export function settingsService(serverCtx: ServerCtxType) {
 
   async function getTransactionCategories(search: string) {
     const rawResult = await _provider.getTransactionCategories(search);
-    const result = rawResult.map((accountType) =>
-      asOption(accountType, "name", "iconName")
+    const result = rawResult.map((transactionCategory) =>
+      transactionCategoryMapper(transactionCategory)
     );
 
     return result;
