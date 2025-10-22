@@ -16,6 +16,7 @@ import { RHFSelect } from "@/components/controlled-components/RHFSelect";
 import { AccountRecordSchema } from "@/app/private/finance-tracker/_data/financeTrackerSchema";
 
 import { mutateAccountRecord } from "./action";
+import { RHFDiagnostic } from "@/components/controlled-components/RHFDiagnostic";
 
 type MutateDialogProps = {
   accountId?: number;
@@ -68,11 +69,12 @@ export function MutateDialog({
         <DialogDescription hidden />
         <FormProvider {...formMethods}>
           <form onSubmit={handleSubmit} className="flex flex-col gap-4">
+            <RHFDiagnostic />
             <RHFInput label="Name" name="name" />
             <RHFInput label="Value" name="value" />
             <RHFSelect
-              label="Record Type"
-              name="accountRecordTypeId"
+              label="Transaction Category"
+              name="transactionCategoryId"
               options={options}
             />
             <div className="flex flex-row justify-between">

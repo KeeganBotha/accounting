@@ -13,7 +13,7 @@ import {
 } from "../ui/dialog";
 import { Button } from "../ui/button";
 import { ICON_OPTIONS } from "../icon";
-import { LinkedOptionSchema, OptionSchema } from "./schema";
+import { LinkedOptionSchema } from "./schema";
 import { RHFInput } from "../controlled-components/RHFInput";
 import { RHFSelect } from "../controlled-components/RHFSelect";
 import { RHFDiagnostic } from "../controlled-components/RHFDiagnostic";

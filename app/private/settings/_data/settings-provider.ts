@@ -76,18 +76,19 @@ export function settingsProvider(serverCtx: ServerCtxType) {
 
   async function mutateTransactionCategory(input: LinkedOptionType) {
     const { iconName, text, value, linkedOptionId } = input;
+    const parsedLinkedOptionId = linkedOptionId ? +linkedOptionId : null;
 
     const result = await _db.transactionCategory.upsert({
       create: {
         name: text,
         iconName: iconName,
         createdBy: serverCtx.id,
-        transactionCategoryGroupId: linkedOptionId,
+        transactionCategoryGroupId: parsedLinkedOptionId,
       },
       update: {
         name: text,
         iconName: iconName,
-        transactionCategoryGroupId: linkedOptionId,
+        transactionCategoryGroupId: parsedLinkedOptionId,
       },
       where: {
         id: +value,
