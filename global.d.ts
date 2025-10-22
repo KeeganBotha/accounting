@@ -8,7 +8,7 @@ type LinkedOptionType = {
   text: string;
   value: string;
   iconName: IconName;
-  linkedOptionId: number | null;
+  linkedOptionId: string | null;
 };
 
 type ServerCtxType = {

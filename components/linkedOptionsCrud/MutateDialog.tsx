@@ -44,17 +44,15 @@ export function MutateDialog({
 }: MutateDialog) {
   const formMethods = useForm({
     resolver: zodResolver(LinkedOptionSchema),
-    defaultValues: { ...option },
+    defaultValues: {
+      ...option,
+      linkedOptionId: option.linkedOptionId?.toString() ?? "",
+    },
   });
 
-  const handleSubmit = formMethods.handleSubmit(
-    async (formData) => {
-      await onSubmit(formData);
-    },
-    (error) => {
-      const x = error;
-    }
-  );
+  const handleSubmit = formMethods.handleSubmit(async (formData) => {
+    await onSubmit(formData);
+  });
 
   return (
     <Dialog>
@@ -76,9 +74,9 @@ export function MutateDialog({
               <DialogClose asChild>
                 <Button variant="secondary">Cancel</Button>
               </DialogClose>
-              {/* <DialogClose asChild> */}
-              <Button type="submit">Submit</Button>
-              {/* </DialogClose> */}
+              <DialogClose asChild>
+                <Button type="submit">Submit</Button>
+              </DialogClose>
             </div>
           </form>
         </FormProvider>
