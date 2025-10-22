@@ -9,12 +9,20 @@ import { MutateDialog } from "./MutateDialog";
 import { Card, CardContent } from "../ui/card";
 
 type OptionCardProps = {
-  option: OptionType;
-  // onEdit: (option: OptionType) => Promise<void>;
+  option: LinkedOptionType;
+  linkedOptions: OptionType[];
+  linkedOptionLabel: string;
+  onEdit: (option: LinkedOptionType) => Promise<void>;
   onDelete: (id: number) => Promise<void>;
 };
 
-export function OptionCard({ option, onDelete }: OptionCardProps) {
+export function OptionCard({
+  option,
+  linkedOptions,
+  linkedOptionLabel,
+  onDelete,
+  onEdit,
+}: OptionCardProps) {
   const { iconName, text, value } = option;
 
   function handleDelete() {
@@ -34,11 +42,17 @@ export function OptionCard({ option, onDelete }: OptionCardProps) {
             </p>
           </div>
           <div className="flex gap-4">
-            {/* <MutateDialog option={option} onSubmit={onEdit} title="Edit Option">
+            <MutateDialog
+              option={option}
+              linkedOptionLabel={linkedOptionLabel}
+              linkedOptions={linkedOptions}
+              onSubmit={onEdit}
+              title="Edit Option"
+            >
               <Button variant="outline" size="icon">
                 <Icon iconName="Edit" />
               </Button>
-            </MutateDialog> */}
+            </MutateDialog>
             <DeleteDialog onDelete={handleDelete} name={text} />
           </div>
         </div>

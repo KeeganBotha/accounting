@@ -40,7 +40,14 @@ export function LinkedOptionsCrud({
 
       <div className="grid gap-4 w-full grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
         {options.map((option) => (
-          <OptionCard key={option.value} option={option} onDelete={onDelete} />
+          <OptionCard
+            key={option.value}
+            option={option}
+            onDelete={onDelete}
+            linkedOptions={linkedOptions}
+            linkedOptionLabel={linkedOptionLabel}
+            onEdit={onMutate}
+          />
         ))}
       </div>
     </div>
