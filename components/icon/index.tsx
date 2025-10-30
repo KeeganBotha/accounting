@@ -25,10 +25,20 @@ import {
   Users,
   Download,
   Upload,
+  UtilityPole,
+  UtensilsCrossed,
+  Car,
+  Store
 } from "lucide-react";
 import { cloneElement } from "react";
 
 const icons = {
+
+
+  Store: <Store />,
+  Car: <Car />,
+  UtensilsCrossed: <UtensilsCrossed />,
+  UtilityPole: <UtilityPole />,
   House: <House />,
   Menu: <Menu />,
   Moon: <Moon />,
