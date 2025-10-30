@@ -1,4 +1,5 @@
 import { splitCamelCase } from "@/lib/utils";
+import { orderBy } from "lodash";
 import {
   Banknote,
   ChevronDown,
@@ -77,10 +78,12 @@ export function Icon({ iconName, className = "" }: IconProps) {
   return cloneElement(icons[iconName], { className });
 }
 
-export const ICON_OPTIONS: OptionType[] = Object.keys(icons).map(
+const UNORDERED_ICON_OPTIONS: OptionType[] = Object.keys(icons).map(
   (iconName) => ({
     text: splitCamelCase(iconName),
     value: iconName,
     iconName: iconName,
   })
 );
+
+export const ICON_OPTIONS: OptionType[] = orderBy(UNORDERED_ICON_OPTIONS, "text");

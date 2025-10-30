@@ -39,7 +39,8 @@ export function MutateDialog({
   });
 
   const handleSubmit = formMethods.handleSubmit(async (formData) => {
-    await onSubmit(formData);
+    await onSubmit(formData); 
+    formMethods.reset();
   });
 
   return (
