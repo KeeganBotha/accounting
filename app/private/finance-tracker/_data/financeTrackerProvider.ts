@@ -28,22 +28,6 @@ export function financeTrackerProvider(serverCtx: ServerCtxType) {
     return result;
   }
 
-  async function getFamilyAccounts(search: string) {
-    //We will need to come back and find a way to link people to the family accounts - Dont want people seeing things they are not meant to
-    const result = await _db.account.findMany({
-      where: {
-        name: {
-          contains: search,
-          mode: "insensitive",
-        },
-        isActive: true,
-        is_shared: true,
-      },
-    });
-
-    return result;
-  }
-
   async function mutateAccount(input: z.infer<typeof AccountSchema>) {
     const currentDate = new Date();
     const { accountId, accountName, accountTypeId, isShared } = input;
@@ -105,7 +89,7 @@ export function financeTrackerProvider(serverCtx: ServerCtxType) {
         value: input.value,
         description: "",
         accountId: input.accountId,
-        // accountRecordTypeId: +input.accountRecordTypeId,
+        transactionCategoryId: undefined,
         createdBy: serverCtx.id,
         createdAt: currentDate,
         updatedBy: serverCtx.id,
@@ -114,7 +98,7 @@ export function financeTrackerProvider(serverCtx: ServerCtxType) {
         value: input.value,
         description: "",
         accountId: input.accountId,
-        // accountRecordTypeId: 1,
+        transactionCategoryId: undefined,
         updatedBy: serverCtx.id,
         updatedAt: currentDate,
       },
@@ -139,6 +123,7 @@ export function financeTrackerProvider(serverCtx: ServerCtxType) {
           accountId: accountId,
           value: i.amount,
           description: i.description,
+          transactionCategoryId: undefined,
           createdAt: i.date,
           createdBy: serverCtx.id,
           updatedBy: serverCtx.id,
@@ -151,7 +136,6 @@ export function financeTrackerProvider(serverCtx: ServerCtxType) {
 
   return {
     getAccount,
-    getFamilyAccounts,
     getPersonalAccounts,
     mutateAccount,
     mutateAccountRecord,
