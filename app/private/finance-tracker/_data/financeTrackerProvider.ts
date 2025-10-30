@@ -134,12 +134,39 @@ export function financeTrackerProvider(serverCtx: ServerCtxType) {
     return result;
   }
 
+  async function mutateTransactionSharedExpense(transactionId: number)
+  {
+    const transaction = await _db.transaction.findUnique({
+      where: {
+        id: transactionId,
+        createdBy: serverCtx.id,
+      },
+    });
+
+    if (!transaction) {
+      throw new Error("Transaction not found");
+    }
+
+    const result = await _db.transaction.update({
+      where: {
+        id: transactionId,
+         createdBy: serverCtx.id,
+      },
+      data: {
+        isShared: !transaction.isShared,
+      },
+    });
+
+    return result.isShared;
+  }
+
   return {
     getAccount,
     getPersonalAccounts,
     mutateAccount,
     mutateAccountRecord,
     mutateAccountRecords,
+    mutateTransactionSharedExpense,
     deleteAccount,
   };
 }

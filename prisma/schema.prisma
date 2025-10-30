@@ -97,6 +97,7 @@ model Transaction {
   transactionCategoryId Int?
   value                Decimal
   description          String
+  isShared             Boolean            @default(false)
 
   createdBy            Int
   createdAt            DateTime           @default(now())

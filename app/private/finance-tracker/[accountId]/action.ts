@@ -6,6 +6,7 @@ import {
   AccountRecordSchema,
 } from "../_data/financeTrackerSchema";
 import { revalidatePath } from "next/cache";
+import { z } from "zod";
 
 export const mutateAccountRecord = privateProcedure
   .schema(AccountRecordSchema)
@@ -29,6 +30,16 @@ export const mutateAccountRecordCsv = privateProcedure
 
     return {
       message: "Account records uploaded successfully.",
+      result,
+    };
+  });
+
+  export const mutateTransactionSharedExpense = privateProcedure.schema(z.number()).action(async ({ctx, parsedInput: transactionId}) => {
+    const result = await ctx.svc.financeTrackerService.mutateTransactionSharedExpense(transactionId);
+    // revalidatePath("/private/finance-tracker/[accountId]", "layout");
+
+    return {
+      message: "Shared Expense Toggled.",
       result,
     };
   });

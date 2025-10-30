@@ -38,6 +38,7 @@ export function financeTrackerService(serverCtx: ServerCtxType) {
         amount: +transaction.value,
         recordType: "Not Specified",
         createdAt: transaction.createdAt.toString(),
+        isShared: transaction.isShared,
       };
     });
 
@@ -62,12 +63,20 @@ export function financeTrackerService(serverCtx: ServerCtxType) {
     return result;
   }
 
+  async function mutateTransactionSharedExpense(transactionId: number)
+  {
+    const result = await _provider.mutateTransactionSharedExpense(transactionId);
+
+    return result;
+  }
+
   return {
     getAccount,
     getPersonalAccounts,
     mutateAccount,
     mutateAccountRecord,
     mutateAccountRecordCsv,
+    mutateTransactionSharedExpense,
     deleteAccount,
   };
 }
