@@ -36,8 +36,7 @@ export function financeTrackerService(serverCtx: ServerCtxType) {
       return {
         id: +transaction.id,
         amount: +transaction.value,
-        transactionType:
-          transaction.transactionCategory?.name ?? "Not Specified",
+        transactionCategoryId: transaction.transactionCategoryId?.toString(),
         description: transaction.description,
         createdAt: transaction.createdAt.toString(),
         isShared: transaction.isShared,

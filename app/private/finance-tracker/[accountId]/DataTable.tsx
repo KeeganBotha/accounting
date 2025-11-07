@@ -24,22 +24,25 @@ import { Button } from "@/components/ui/button";
 
 import { CsvDialog } from "./CsvDialog";
 import { MutateDialog } from "./MutateDialog";
+import { createColumns } from "./columns";
 
 interface DataTableProps<TData, TValue> {
   accountId: number;
-  columns: ColumnDef<TData, TValue>[];
+  // columns: ColumnDef<TData, TValue>[];
   data: TData[];
   options: OptionType[];
 }
 
 export function DataTable<TData, TValue>({
-  columns,
+  // columns,
   data,
   accountId,
   options,
 }: DataTableProps<TData, TValue>) {
   const [openAdd, setOpenAdd] = React.useState(false);
   const [openCSV, setOpenCSV] = React.useState(false);
+
+  const columns: any = createColumns(options);
 
   const table = useReactTable({
     data,
@@ -125,12 +128,12 @@ export function DataTable<TData, TValue>({
           </TableBody>
         </Table>
       </div>
-      <MutateDialog
+      {/* <MutateDialog
         open={openAdd}
         setOpen={setOpenAdd}
         accountId={accountId}
         options={options}
-      />
+      /> */}
       <CsvDialog open={openCSV} setOpen={setOpenCSV} accountId={accountId} />
     </div>
   );

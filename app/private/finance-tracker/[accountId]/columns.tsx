@@ -6,56 +6,87 @@ import { ColumnDef } from "@tanstack/react-table";
 import { format } from "date-fns";
 import React from "react";
 import { mutateTransactionSharedExpense } from "./action";
+import { Select } from "@/components/controlled-components/RHFSelect";
+import { getTransactionCategories } from "../../settings/transaction-category/action";
 
 export type Payment = {
   id: number;
   amount: number;
   createdAt: string;
-  transactionType: string;
+  transactionCategoryId: string | undefined;
   description: string;
   isShared: boolean;
 };
 
-export const columns: ColumnDef<Payment>[] = [
-  {
-    accessorKey: "id",
-    header: "Id",
-  },
-  {
-    accessorKey: "amount",
-    header: "Amount",
-  },
-  {
-    accessorKey: "transactionType",
-    header: "Transaction Type",
-  },
-  {
-    accessorKey: "description",
-    header: "Description",
-  },
-  {
-    accessorKey: "createdAt",
-    header: "Created At",
-    cell: ({ getValue }) => <>{format(getValue() as string, "dd/MM/yyyy")}</>,
-  },
-  {
-    accessorKey: "isShared",
-    header: "Is Shared",
-    cell: ({ row }) => {
-      const transaction = row.original;
-      console.log("transaction", transaction);
+export function createColumns(options: OptionType[]) {
+  const columns: ColumnDef<Payment>[] = [
+    {
+      accessorKey: "id",
+      header: "Id",
+    },
+    {
+      accessorKey: "amount",
+      header: "Amount",
+    },
+    {
+      accessorKey: "transactionCategoryId",
+      header: "Transaction Category",
+      cell: ({ row }) => {
+        const transaction = row.original;
 
-      const [isChecked, setIsChecked] = React.useState(transaction.isShared);
-
-      async function handleChange(input: boolean) {
-        const result = handleSafeActionResult(
-          await mutateTransactionSharedExpense(transaction.id)
+        const [selectedValue, setSelectedValue] = React.useState(
+          transaction.transactionCategoryId
         );
 
-        if (result && result.result) setIsChecked(result.result);
-      }
+        async function handleChange(value: string | undefined) {
+          // const result = handleSafeActionResult(
+          //   await mutateTransactionSharedExpense(transaction.id)
+          // );
 
-      return <Checkbox checked={isChecked} onCheckedChange={handleChange} />;
+          // if (result && result.result)
+          setSelectedValue(value);
+        }
+
+        return (
+          <div className="pr-8">
+            <Select
+              onChange={handleChange}
+              options={options}
+              value={selectedValue}
+            />
+          </div>
+        );
+      },
     },
-  },
-];
+    {
+      accessorKey: "description",
+      header: "Description",
+    },
+    {
+      accessorKey: "createdAt",
+      header: "Created At",
+      cell: ({ getValue }) => <>{format(getValue() as string, "dd/MM/yyyy")}</>,
+    },
+    {
+      accessorKey: "isShared",
+      header: "Is Shared",
+      cell: ({ row }) => {
+        const transaction = row.original;
+
+        const [isChecked, setIsChecked] = React.useState(transaction.isShared);
+
+        async function handleChange() {
+          const result = handleSafeActionResult(
+            await mutateTransactionSharedExpense(transaction.id)
+          );
+
+          if (result && result.result) setIsChecked(result.result);
+        }
+
+        return <Checkbox checked={isChecked} onCheckedChange={handleChange} />;
+      },
+    },
+  ];
+
+  return columns;
+}

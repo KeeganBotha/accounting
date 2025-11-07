@@ -1,4 +1,3 @@
-import { columns } from "./columns";
 import { DataTable } from "./DataTable";
 import { getAccount } from "../personal/action";
 import { getTransactionCategories } from "../../settings/transaction-category/action";
@@ -18,12 +17,5 @@ export default async function Page({ params }: PageProps) {
   const data = query?.data?.result ?? [];
   const options = optionsQuery?.data?.result ?? [];
 
-  return (
-    <DataTable
-      columns={columns}
-      data={data}
-      accountId={accountId}
-      options={options}
-    />
-  );
+  return <DataTable options={options} data={data} accountId={accountId} />;
 }

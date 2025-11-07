@@ -47,11 +47,11 @@ type SelectProps = {
   onChange: (value: string) => void;
 };
 
-function Select({ options, value, onChange }: SelectProps) {
+export function Select({ options, value, onChange }: SelectProps) {
   return (
     <SelectContainer onValueChange={onChange} defaultValue={value}>
       <SelectTrigger className="w-full">
-        <SelectValue placeholder="Select a verified email to display" />
+        <SelectValue placeholder="Please select an option" />
       </SelectTrigger>
       <SelectContent>
         {options.map((option) => {
