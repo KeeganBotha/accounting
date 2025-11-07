@@ -11,7 +11,8 @@ export type Payment = {
   id: number;
   amount: number;
   createdAt: string;
-  recordType: string;
+  transactionType: string;
+  description: string;
   isShared: boolean;
 };
 
@@ -25,8 +26,12 @@ export const columns: ColumnDef<Payment>[] = [
     header: "Amount",
   },
   {
-    accessorKey: "recordType",
-    header: "Record Type",
+    accessorKey: "transactionType",
+    header: "Transaction Type",
+  },
+  {
+    accessorKey: "description",
+    header: "Description",
   },
   {
     accessorKey: "createdAt",
@@ -43,13 +48,14 @@ export const columns: ColumnDef<Payment>[] = [
       const [isChecked, setIsChecked] = React.useState(transaction.isShared);
 
       async function handleChange(input: boolean) {
-        const result = handleSafeActionResult(await mutateTransactionSharedExpense(transaction.id))
+        const result = handleSafeActionResult(
+          await mutateTransactionSharedExpense(transaction.id)
+        );
 
-        if(result && result.result)
-          setIsChecked(result.result)
+        if (result && result.result) setIsChecked(result.result);
       }
 
-      return <Checkbox checked={isChecked} onCheckedChange={handleChange}  />
-    }
-  }
+      return <Checkbox checked={isChecked} onCheckedChange={handleChange} />;
+    },
+  },
 ];

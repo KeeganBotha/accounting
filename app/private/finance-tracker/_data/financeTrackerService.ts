@@ -36,7 +36,9 @@ export function financeTrackerService(serverCtx: ServerCtxType) {
       return {
         id: +transaction.id,
         amount: +transaction.value,
-        recordType: "Not Specified",
+        transactionType:
+          transaction.transactionCategory?.name ?? "Not Specified",
+        description: transaction.description,
         createdAt: transaction.createdAt.toString(),
         isShared: transaction.isShared,
       };
@@ -63,9 +65,9 @@ export function financeTrackerService(serverCtx: ServerCtxType) {
     return result;
   }
 
-  async function mutateTransactionSharedExpense(transactionId: number)
-  {
-    const result = await _provider.mutateTransactionSharedExpense(transactionId);
+  async function mutateTransactionSharedExpense(transactionId: number) {
+    const result =
+      await _provider.mutateTransactionSharedExpense(transactionId);
 
     return result;
   }

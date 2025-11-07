@@ -69,7 +69,11 @@ export function financeTrackerProvider(serverCtx: ServerCtxType) {
   async function getAccount(accountId: number) {
     const result = await _db.account.findFirst({
       include: {
-        transactions: true,
+        transactions: {
+          include: {
+            transactionCategory: true,
+          },
+        },
       },
       where: {
         id: accountId,
@@ -134,8 +138,7 @@ export function financeTrackerProvider(serverCtx: ServerCtxType) {
     return result;
   }
 
-  async function mutateTransactionSharedExpense(transactionId: number)
-  {
+  async function mutateTransactionSharedExpense(transactionId: number) {
     const transaction = await _db.transaction.findUnique({
       where: {
         id: transactionId,
@@ -150,7 +153,7 @@ export function financeTrackerProvider(serverCtx: ServerCtxType) {
     const result = await _db.transaction.update({
       where: {
         id: transactionId,
-         createdBy: serverCtx.id,
+        createdBy: serverCtx.id,
       },
       data: {
         isShared: !transaction.isShared,
