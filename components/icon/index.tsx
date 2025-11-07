@@ -29,13 +29,13 @@ import {
   UtilityPole,
   UtensilsCrossed,
   Car,
-  Store
+  Store,
+  Plug,
+  Wifi,
 } from "lucide-react";
 import { cloneElement } from "react";
 
 const icons = {
-
-
   Store: <Store />,
   Car: <Car />,
   UtensilsCrossed: <UtensilsCrossed />,
@@ -65,6 +65,8 @@ const icons = {
   Users: <Users />,
   Download: <Download />,
   Upload: <Upload />,
+  Plug: <Plug />,
+  Wifi: <Wifi />,
 };
 
 export type IconName = keyof typeof icons;
@@ -86,4 +88,7 @@ const UNORDERED_ICON_OPTIONS: OptionType[] = Object.keys(icons).map(
   })
 );
 
-export const ICON_OPTIONS: OptionType[] = orderBy(UNORDERED_ICON_OPTIONS, "text");
+export const ICON_OPTIONS: OptionType[] = orderBy(
+  UNORDERED_ICON_OPTIONS,
+  "text"
+);
