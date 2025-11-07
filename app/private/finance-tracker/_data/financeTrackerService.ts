@@ -6,6 +6,7 @@ import {
   AccountCsvSchema,
   AccountRecordSchema,
   AccountSchema,
+  TransactionCategorySchema,
 } from "./financeTrackerSchema";
 import { financeTrackerProvider } from "./financeTrackerProvider";
 
@@ -71,12 +72,21 @@ export function financeTrackerService(serverCtx: ServerCtxType) {
     return result;
   }
 
+  async function mutateTransactionCategory(
+    input: z.infer<typeof TransactionCategorySchema>
+  ) {
+    const result = await _provider.mutateTransactionCategory(input);
+
+    return result;
+  }
+
   return {
     getAccount,
     getPersonalAccounts,
     mutateAccount,
     mutateAccountRecord,
     mutateAccountRecordCsv,
+    mutateTransactionCategory,
     mutateTransactionSharedExpense,
     deleteAccount,
   };

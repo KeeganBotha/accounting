@@ -6,6 +6,7 @@ import {
   AccountCsvShapeSchema,
   AccountRecordSchema,
   AccountSchema,
+  TransactionCategorySchema,
 } from "./financeTrackerSchema";
 
 export function financeTrackerProvider(serverCtx: ServerCtxType) {
@@ -163,12 +164,30 @@ export function financeTrackerProvider(serverCtx: ServerCtxType) {
     return result.isShared;
   }
 
+  async function mutateTransactionCategory(
+    input: z.infer<typeof TransactionCategorySchema>
+  ) {
+    const { transactionId, transactionCategoryId } = input;
+
+    const result = await _db.transaction.update({
+      data: {
+        transactionCategoryId: transactionCategoryId,
+      },
+      where: {
+        id: transactionId,
+      },
+    });
+
+    return result;
+  }
+
   return {
     getAccount,
     getPersonalAccounts,
     mutateAccount,
     mutateAccountRecord,
     mutateAccountRecords,
+    mutateTransactionCategory,
     mutateTransactionSharedExpense,
     deleteAccount,
   };

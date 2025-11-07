@@ -44,3 +44,8 @@ export const AccountCsvShapeSchema = z.object({
   description: z.string(),
   balance: z.coerce.number(),
 });
+
+export const TransactionCategorySchema = z.object({
+  transactionId: z.coerce.number(),
+  transactionCategoryId: z.coerce.number().optional(),
+});

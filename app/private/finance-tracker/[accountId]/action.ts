@@ -4,6 +4,7 @@ import { privateProcedure } from "@/lib/safe-action";
 import {
   AccountCsvSchema,
   AccountRecordSchema,
+  TransactionCategorySchema,
 } from "../_data/financeTrackerSchema";
 import { revalidatePath } from "next/cache";
 import { z } from "zod";
@@ -34,12 +35,32 @@ export const mutateAccountRecordCsv = privateProcedure
     };
   });
 
-  export const mutateTransactionSharedExpense = privateProcedure.schema(z.number()).action(async ({ctx, parsedInput: transactionId}) => {
-    const result = await ctx.svc.financeTrackerService.mutateTransactionSharedExpense(transactionId);
-    // revalidatePath("/private/finance-tracker/[accountId]", "layout");
+export const mutateTransactionSharedExpense = privateProcedure
+  .schema(z.number())
+  .action(async ({ ctx, parsedInput: transactionId }) => {
+    const result =
+      await ctx.svc.financeTrackerService.mutateTransactionSharedExpense(
+        transactionId
+      );
+    revalidatePath("/private/finance-tracker/[accountId]", "layout");
 
     return {
       message: "Shared Expense Toggled.",
+      result,
+    };
+  });
+
+export const mutateTransactionCategory = privateProcedure
+  .schema(TransactionCategorySchema)
+  .action(async ({ ctx, parsedInput }) => {
+    const result =
+      await ctx.svc.financeTrackerService.mutateTransactionCategory(
+        parsedInput
+      );
+    revalidatePath("/private/finance-tracker/[accountId]", "layout");
+
+    return {
+      message: "Transaction Category Updated.",
       result,
     };
   });

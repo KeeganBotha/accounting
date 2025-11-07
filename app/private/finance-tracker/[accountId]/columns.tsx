@@ -5,7 +5,10 @@ import { handleSafeActionResult } from "@/lib/utils";
 import { ColumnDef } from "@tanstack/react-table";
 import { format } from "date-fns";
 import React from "react";
-import { mutateTransactionSharedExpense } from "./action";
+import {
+  mutateTransactionCategory,
+  mutateTransactionSharedExpense,
+} from "./action";
 import { Select } from "@/components/controlled-components/RHFSelect";
 import { getTransactionCategories } from "../../settings/transaction-category/action";
 
@@ -39,12 +42,16 @@ export function createColumns(options: OptionType[]) {
         );
 
         async function handleChange(value: string | undefined) {
-          // const result = handleSafeActionResult(
-          //   await mutateTransactionSharedExpense(transaction.id)
-          // );
+          const result = handleSafeActionResult(
+            await mutateTransactionCategory({
+              transactionId: transaction.id,
+              transactionCategoryId: transaction.transactionCategoryId
+                ? +transaction.transactionCategoryId
+                : undefined,
+            })
+          );
 
-          // if (result && result.result)
-          setSelectedValue(value);
+          if (result && result.result) setSelectedValue(result.result.transactionCategoryId.);
         }
 
         return (
