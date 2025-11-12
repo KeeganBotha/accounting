@@ -1,6 +1,6 @@
 import { DataTable } from "./DataTable";
-import { getAccount } from "../personal/action";
-import { getTransactionCategories } from "../../settings/transaction-category/action";
+import { getAccount } from "../../personal/action";
+import { getTransactionCategories } from "../../../settings/transaction-category/action";
 
 type PageProps = {
   params: Promise<{ accountId: number }>;

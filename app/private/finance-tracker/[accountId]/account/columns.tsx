@@ -10,7 +10,6 @@ import {
   mutateTransactionSharedExpense,
 } from "./action";
 import { Select } from "@/components/controlled-components/RHFSelect";
-import { getTransactionCategories } from "../../settings/transaction-category/action";
 
 export type Payment = {
   id: number;
@@ -51,7 +50,10 @@ export function createColumns(options: OptionType[]) {
             })
           );
 
-          if (result && result.result) setSelectedValue(result.result.transactionCategoryId.);
+          if (result && result.result)
+            setSelectedValue(
+              result.result.transactionCategoryId?.toString() ?? undefined
+            );
         }
 
         return (

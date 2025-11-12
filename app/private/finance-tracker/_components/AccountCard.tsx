@@ -16,7 +16,7 @@ export function AccountCard({
   accountName,
 }: AccountCardProps) {
   return (
-    <Link href={`/private/finance-tracker/${id}`}>
+    <Link href={`/private/finance-tracker/${id}/account`}>
       <Card className="h-fit hover:scale-[99%] duration-300 transition-all cursor-pointer">
         <CardContent className="flex flex-row justify-between">
           <div className="flex flex-col gap-2">

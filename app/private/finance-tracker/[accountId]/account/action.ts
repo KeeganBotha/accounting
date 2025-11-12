@@ -5,7 +5,7 @@ import {
   AccountCsvSchema,
   AccountRecordSchema,
   TransactionCategorySchema,
-} from "../_data/financeTrackerSchema";
+} from "../../_data/financeTrackerSchema";
 import { revalidatePath } from "next/cache";
 import { z } from "zod";
 

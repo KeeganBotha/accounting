@@ -3,7 +3,6 @@
 import React from "react";
 import Link from "next/link";
 import {
-  ColumnDef,
   flexRender,
   getCoreRowModel,
   useReactTable,
@@ -23,7 +22,6 @@ import { Search } from "@/components/search";
 import { Button } from "@/components/ui/button";
 
 import { CsvDialog } from "./CsvDialog";
-import { MutateDialog } from "./MutateDialog";
 import { createColumns } from "./columns";
 
 interface DataTableProps<TData, TValue> {
