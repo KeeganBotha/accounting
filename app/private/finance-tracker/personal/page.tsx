@@ -1,6 +1,6 @@
-import { getAccountTypes } from "../../settings/account-type/action";
 import { List } from "../List";
 import { getPersonalAccounts } from "./action";
+import { getAccountTypes } from "../../settings/account-type/action";
 
 type PageProps = {
   searchParams: Promise<{ search: string }>;

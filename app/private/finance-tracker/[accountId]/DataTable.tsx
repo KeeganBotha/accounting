@@ -76,7 +76,7 @@ export function DataTable<TData, TValue>({
         </div>
       </div>
 
-      <div className="rounded-md border w-full overflow-y-auto max-h-[calc(100dvh-11rem)]">
+      <div className="rounded-md border w-full overflow-y-auto max-h-[calc(100dvh-14rem)]">
         <Table>
           <TableHeader className="sticky top-0 z-10 bg-card">
             {table.getHeaderGroups().map((headerGroup) => (

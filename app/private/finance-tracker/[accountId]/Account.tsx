@@ -1,4 +1,5 @@
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+
 import { DataTable } from "./DataTable";
 
 interface AccountProps<TData, TValue> {
@@ -13,13 +14,19 @@ export function Account<TData, TValue>({
   options,
 }: AccountProps<TData, TValue>) {
   return (
-    <Tabs>
-      <TabsList>
-        <TabsTrigger value="account"></TabsTrigger>
-      </TabsList>
-      <TabsContent value="account">
-        <DataTable options={options} data={data} accountId={accountId} />;
-      </TabsContent>
-    </Tabs>
+    <div className=" w-full">
+      <Tabs defaultValue="account">
+        <TabsList>
+          <TabsTrigger value="account">Account</TabsTrigger>
+          <TabsTrigger value="expenses">Expenses</TabsTrigger>
+        </TabsList>
+        <TabsContent value="account">
+          <DataTable options={options} data={data} accountId={accountId} />
+        </TabsContent>
+        <TabsContent value="expenses">
+          <div>Im an expense</div>
+        </TabsContent>
+      </Tabs>
+    </div>
   );
 }
