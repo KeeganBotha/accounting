@@ -1,5 +1,5 @@
 import { getAccountTypes } from "../../settings/account-type/action";
-import { List } from "../_components/List";
+import { List } from "../List";
 import { getPersonalAccounts } from "./action";
 
 type PageProps = {

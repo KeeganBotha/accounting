@@ -1,6 +1,7 @@
+import Link from "next/link";
+
 import { Icon, IconName } from "@/components/icon";
 import { Card, CardContent } from "@/components/ui/card";
-import Link from "next/link";
 
 type AccountCardProps = {
   id: number;

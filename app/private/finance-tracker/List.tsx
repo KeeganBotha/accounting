@@ -10,8 +10,8 @@ import { handleSafeActionResult } from "@/lib/utils";
 
 import { MutateDialog } from "./MutateDialog";
 import { AccountCard } from "./AccountCard";
-import { AccountSchema } from "../_data/financeTrackerSchema";
-import { getPersonalAccounts, mutateAccount } from "../personal/action";
+import { AccountSchema } from "./_data/financeTrackerSchema";
+import { getPersonalAccounts, mutateAccount } from "./personal/action";
 
 type ListProps = {
   accounts: NonNullable<
